@@ -1,0 +1,35 @@
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Release\db.mdb
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Release\shop.exe.config
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Release\shop.exe
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Release\shop.pdb
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.Goods.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.Client.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.User.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.Unit.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.Properties.Resources.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.csproj.GenerateResource.Cache
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.exe
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.pdb
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.ShopForm.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.Dok.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Release\shop.AddGoods.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\bin\Release\db.mdb
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\bin\Release\sql.mdf
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\bin\Release\sql_log.ldf
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\bin\Release\shop.exe.config
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\bin\Release\shop.exe
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\bin\Release\shop.pdb
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.ShopForm.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.Goods.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.Client.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.User.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.Unit.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.Dok.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.AddGoods.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.Properties.Resources.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\WindowsFormsApplication3.csproj.GenerateResource.Cache
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.exe
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.pdb
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Release\shop.Autoriz.resources

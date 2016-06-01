@@ -1,0 +1,39 @@
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.exe.config
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Debug\shop.exe.config
+c:\users\admin\Desktop\Проект учет в магазине\shop.exe.config
+c:\users\admin\Desktop\Проект учет в магазине\shop.exe
+c:\users\admin\Desktop\Проект учет в магазине\shop.pdb
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.Properties.Resources.resources
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.exe
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.pdb
+c:\users\admin\Desktop\Проект учет в магазине\db.mdb
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.Goods.resources
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.Client.resources
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.User.resources
+c:\users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.Unit.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.ShopForm.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.Dok.resources
+C:\Users\admin\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\shop.AddGoods.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.exe
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.pdb
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.ShopForm.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Goods.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Client.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.User.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Unit.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Dok.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.AddGoods.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Properties.Resources.resources
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\Проект учет в магазине\sql.mdf
+C:\Users\admin\Desktop\Проект учет в магазине\sql_log.ldf
+C:\Users\admin\Desktop\Проект учет в магазине server\shop.exe.config
+C:\Users\admin\Desktop\Проект учет в магазине server\db.mdb
+C:\Users\admin\Desktop\Проект учет в магазине server\sql.mdf
+C:\Users\admin\Desktop\Проект учет в магазине server\sql_log.ldf
+C:\Users\admin\Desktop\Проект учет в магазине server\shop.exe
+C:\Users\admin\Desktop\Проект учет в магазине server\shop.pdb
+C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Autoriz.resources
