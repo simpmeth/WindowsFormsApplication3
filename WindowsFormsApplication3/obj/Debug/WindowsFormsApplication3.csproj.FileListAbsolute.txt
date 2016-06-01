@@ -37,3 +37,39 @@ C:\Users\admin\Desktop\Проект учет в магазине server\sql_log.
 C:\Users\admin\Desktop\Проект учет в магазине server\shop.exe
 C:\Users\admin\Desktop\Проект учет в магазине server\shop.pdb
 C:\Users\admin\Documents\Visual Studio 2012\Projects\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Autoriz.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.ShopForm.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Goods.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Client.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.User.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Unit.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Dok.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.AddGoods.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Autoriz.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Properties.Resources.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
+C:\Users\kati.trefi\Desktop\Проект учет в магазине server\shop.exe.config
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\shop.exe.config
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\db.mdb
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\sql.mdf
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\sql_log.ldf
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.exe
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.pdb
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\shop.exe
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\shop.pdb
+C:\Users\kati.trefi\Downloads\Пример\Пример\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\shop.exe.config
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.exe
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.pdb
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.ShopForm.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Goods.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Client.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.User.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Unit.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Dok.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.AddGoods.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Autoriz.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\shop.Properties.Resources.resources
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\shop.exe
+C:\Users\kati.trefi\Downloads\Пример\Пример_my\WindowsFormsApplication3 sql_server\shop.pdb

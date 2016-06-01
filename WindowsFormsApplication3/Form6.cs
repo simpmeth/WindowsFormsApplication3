@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication3;
+
 
 namespace shop
 {
@@ -20,27 +15,16 @@ namespace shop
 
         private void Dok_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.sklad". При необходимости она может быть перемещена или удалена.
-            this.skladTableAdapter.Fill(this.dbDataSet.sklad);
-            this.clientTableAdapter.Fill(this.dbDataSet.client);
-            this.userTableAdapter.Fill(this.dbDataSet.user);
-            this.goodsTableAdapter.Fill(this.dbDataSet.goods);
-            this.dokTableAdapter.Fill(this.dbDataSet.dok);
-            this.nomenklaturaTableAdapter.Fill(this.dbDataSet.nomenklatura);
+          
 
-            labelId.Text = Convert.ToString(dbDataSet.dok.Count+1);
-            int i=dbDataSet.dok.Count;
-            labelKod.Text=Convert.ToString(dbDataSet.dok.Count+1);
-            labelKod.Text = Convert.ToString(Convert.ToInt32(dbDataSet.dok.Rows[dbDataSet.dok.Count - 1]["Ид"].ToString()) + 1);
-
+            //labelId.Text = Convert.ToString(dbDataSet.dok.Count+1);
+            //int i=dbDataSet.dok.Count;
+            //labelKod.Text=Convert.ToString(dbDataSet.dok.Count+1);
+           // labelKod.Text = Convert.ToString(Convert.ToInt32(dbDataSet.dok.Rows[dbDataSet.dok.Count - 1]["Ид"].ToString()) + 1);
            
         }
 
-        private void comboClient_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
+     
         private void button1_Click(object sender, EventArgs e)
         {
             AddGoods newForm = new AddGoods();
@@ -49,16 +33,30 @@ namespace shop
 
         }
 
+        private void ReloadClientData()
+        {
+            var selectedItem = comboClient.SelectedItem as DataRowView;
+            labelAdresClient.Text = selectedItem.Row["Адрес"].ToString();
+            labelKodClient.Text = selectedItem.Row["Код"].ToString();
+        }
+
+        private void ReloadUserData()
+        {
+            var selectedItem = comboUser.SelectedItem as DataRowView;
+            labelAdresUser.Text = selectedItem.Row["Адрес"].ToString();
+            
+        }
+
+
         private void comboClient_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            labelAdresClient.Text = dbDataSet.client.Rows[Convert.ToInt32(comboClient.SelectedValue.ToString()) - 1]["Адрес"].ToString();
-            labelKodClient.Text = dbDataSet.client.Rows[Convert.ToInt32(comboClient.SelectedValue.ToString()) - 1]["Код"].ToString();
+            ReloadClientData();
         }
 
         private void comboUser_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            labelAdresUser.Text = dbDataSet.user.Rows[Convert.ToInt32(comboUser.SelectedValue.ToString()) - 1]["Адрес"].ToString();
-
+            // labelAdresUser.Text = dbDataSet.user.Rows[Convert.ToInt32(comboUser.SelectedValue.ToString()) - 1]["Адрес"].ToString();
+            ReloadUserData();
         }
 
         private void comboUser_SelectedValueChanged(object sender, EventArgs e)
@@ -68,26 +66,39 @@ namespace shop
 
         private void comboClient_Click(object sender, EventArgs e)
         {
-            comboClient.DataSource = dbDataSet.client;
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Наименование, Телефон, Адрес FROM dbo.client");
+            comboClient.DataSource = dataReaderBySql.GetDataSource();
+
             comboClient.DisplayMember = "Наименование";
             comboClient.ValueMember = "Код";
+
+            dataReaderBySql.CloseDbConnection();
+
+            ReloadClientData();
         }
 
         private void comboUser_Click(object sender, EventArgs e)
         {
-            comboUser.DataSource = dbDataSet.user;
+            /*comboUser.DataSource = dbDataSet.user;
+            comboUser.DisplayMember = "Фамилия";
+            comboUser.ValueMember = "Код";*/
+
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT        [Код], [Имя], [Фамилия], [Отчество], [Пароль], [Тел], [Адрес] FROM [user]");
+            comboUser.DataSource = dataReaderBySql.GetDataSource();
+
             comboUser.DisplayMember = "Фамилия";
             comboUser.ValueMember = "Код";
+
+            dataReaderBySql.CloseDbConnection();
+
+            ReloadUserData();
         }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         public void setNewAddGoods(int indexGoods, int kolGoods)
         {
-            int sum = Convert.ToInt32(Summa.Text.ToString());
+           /* int sum = Convert.ToInt32(Summa.Text.ToString());
             int priceGoods = Convert.ToInt32(dbDataSet.goods.Rows[indexGoods]["Цена"].ToString());
             int price = priceGoods * kolGoods;
             sum = sum + price;
@@ -107,12 +118,12 @@ namespace shop
 
             this.skladTableAdapter.Update(this.dbDataSet.sklad);
             this.skladTableAdapter.Fill(this.dbDataSet.sklad);
-
+            */
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (comboClient.Text == "" || comboUser.Text == "" || dbDataSet.sklad.Rows.Count < 1)
+          /*  if (comboClient.Text == "" || comboUser.Text == "" || dbDataSet.sklad.Rows.Count < 1)
             {
                 label7.Visible = true;
             }
@@ -145,12 +156,13 @@ namespace shop
                 this.Close();
             }
 
-
+    */
 
         }
 
         private void butDelete_Click(object sender, EventArgs e)
         {
+            /*
             if (dbDataSet.sklad.Rows.Count > 0)
             {
                 int sum = Convert.ToInt32(Summa.Text.ToString());
@@ -164,12 +176,12 @@ namespace shop
                 this.skladTableAdapter.Update(this.dbDataSet.sklad);
                 this.skladTableAdapter.Fill(this.dbDataSet.sklad);
             }
-
+            */
         }
 
         private void Dok_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (dbDataSet.sklad.Rows.Count > 0)
+          /*  if (dbDataSet.sklad.Rows.Count > 0)
             {
                 for (int i = 0; i <= dbDataSet.sklad.Rows.Count; i++)
                 {//очищает таблицу
@@ -179,26 +191,25 @@ namespace shop
                     this.skladTableAdapter.Fill(this.dbDataSet.sklad);
                 }
             }
+*/        }
+
+        public void Edit()
+        {//процедура заполняет поля значениями, при редактировании(вызывается из первой формы)
+            /*idRead = id;
+            Status = "read";
+            nameUnit.Text = name1;
+            nameUnit2.Text = name2;
+            */
         }
 
-        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        private void comboClient_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                this.nomenklaturaTableAdapter.Fill(this.dbDataSet.nomenklatura);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
+       
         }
 
-        private void Dok_FormClosing(object sender, FormClosingEventArgs e)
+        private void comboUser_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
-
     }
 }

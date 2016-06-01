@@ -37,11 +37,10 @@
             this.l = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dbDataSet1 = new shop.dbDataSet();
-            this.userTableAdapter = new shop.dbDataSetTableAdapters.userTableAdapter();
+         
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet1)).BeginInit();
+         
             this.SuspendLayout();
             // 
             // button1
@@ -100,16 +99,8 @@
             // userBindingSource
             // 
             this.userBindingSource.DataMember = "user";
-            this.userBindingSource.DataSource = this.dbDataSet1;
-            // 
-            // dbDataSet1
-            // 
-            this.dbDataSet1.DataSetName = "dbDataSet";
-            this.dbDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // userTableAdapter
-            // 
-            this.userTableAdapter.ClearBeforeFill = true;
+         
+         
             // 
             // label2
             // 
@@ -143,7 +134,7 @@
             this.Text = "Авторизация";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Autoriz_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet1)).EndInit();
+           
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,8 +149,7 @@
         private System.Windows.Forms.Label l;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource userBindingSource;
-        private dbDataSet dbDataSet1;
-        private dbDataSetTableAdapters.userTableAdapter userTableAdapter;
+    
         private System.Windows.Forms.Label label2;
     }
 }

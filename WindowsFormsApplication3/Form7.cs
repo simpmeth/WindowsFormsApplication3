@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication3;
 
 namespace shop
 {
@@ -16,7 +10,14 @@ namespace shop
         {//подглючаем базу для составления списка продуктов
             InitializeComponent();
 
-            this.goodsTableAdapter.Fill(this.dbDataSet.goods);
+            /*var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название FROM dbo.goods");
+            comboGoods.DataSource = dataReaderBySql.GetDataSource();
+
+            dataReaderBySql.CloseDbConnection();
+
+            comboGoods.DisplayMember = "Название";
+            comboGoods.ValueMember = "Код";*/
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -26,7 +27,13 @@ namespace shop
 
         private void comboBox1_Click(object sender, EventArgs e)
         {//загружаем список продуктов по первому клику на бокс
-            comboGoods.DataSource = dbDataSet.goods;
+            
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название FROM dbo.goods");
+            comboGoods.DataSource = dataReaderBySql.GetDataSource();
+            
+            dataReaderBySql.CloseDbConnection();
+
             comboGoods.DisplayMember = "Название";
             comboGoods.ValueMember = "Код";
         }
@@ -40,24 +47,11 @@ namespace shop
             else
             {
                 Dok Dok = (Dok)this.Owner;
-                Dok.setNewAddGoods(Convert.ToInt32(comboGoods.SelectedValue.ToString()) - 1, Convert.ToInt32(textKol.Text.ToString()));
+                Dok.setNewAddGoods(Convert.ToInt32(comboGoods.SelectedIndex), Convert.ToInt32(textKol.Text.ToString()));
                 AddGoods.ActiveForm.Close();
             }
         }
 
-        private void textKol_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textKol_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-        private void comboGoods_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

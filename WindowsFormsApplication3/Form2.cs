@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication3;
 
@@ -19,8 +12,15 @@ namespace shop
         public Goods()
         {
             InitializeComponent();
-            this.unitTableAdapter.Fill(this.dbDataSet.unit);
-            
+
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название, Сокращение FROM dbo.unit");
+            comboUnit.DataSource = dataReaderBySql.GetDataSource();
+
+            dataReaderBySql.CloseDbConnection();
+
+            comboUnit.DisplayMember = "Сокращение";
+            comboUnit.ValueMember = "Код";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -37,23 +37,17 @@ namespace shop
             else
             {
                 ShopForm shop = (ShopForm)this.Owner;
-                int kodEd = Convert.ToInt32(comboUnit.SelectedValue.ToString());
-                shop.setNewGoods(Status, idRead, kodEd, name.Text, har.Text, comboUnit.Text, price.Text);
+                shop.setNewGoods(Status, idRead, Convert.ToInt32(comboUnit.SelectedValue.ToString()), name.Text, har.Text, comboUnit.Text, price.Text, comboUnit.SelectedIndex.ToString());
                 Goods.ActiveForm.Close();
             }
         }
 
-        private void unit_Click(object sender, EventArgs e)
-        {
-            comboUnit.DataSource = dbDataSet.unit;
-            comboUnit.DisplayMember = "Сокращение";
-            comboUnit.ValueMember = "Код";
-        }
+       
 
          public void Edit(int id,string name1,string har1,string comboUnit1,string price1)
         {//процедура заполняет поля значениями, при редактировании(вызывается из первой формы)
             idRead = id;
-             Status = "read";
+            Status = "read";
             name.Text=name1;
             har.Text=har1;
             comboUnit.Text=comboUnit1;
@@ -76,5 +70,10 @@ namespace shop
          {
 
          }
+
+        private void Goods_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

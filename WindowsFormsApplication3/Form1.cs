@@ -1,12 +1,6 @@
 ﻿using shop;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -14,7 +8,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace WindowsFormsApplication3
 {
     public partial class ShopForm : Form
-    {
+    {   
+
+       
         public ShopForm()
         {
             InitializeComponent();
@@ -22,26 +18,227 @@ namespace WindowsFormsApplication3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet1.nomenklatura". При необходимости она может быть перемещена или удалена.
-            this.nomenklaturaTableAdapter.Fill(this.dbDataSet1.nomenklatura);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.unit". При необходимости она может быть перемещена или удалена.
-            this.unitTableAdapter.Fill(this.dbDataSet.unit);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.user". При необходимости она может быть перемещена или удалена.
-            this.userTableAdapter.Fill(this.dbDataSet.user);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.client". При необходимости она может быть перемещена или удалена.
-            this.clientTableAdapter.Fill(this.dbDataSet.client);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.goods". При необходимости она может быть перемещена или удалена.
-            this.goodsTableAdapter.Fill(this.dbDataSet.goods);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.dok". При необходимости она может быть перемещена или удалена.
-            this.dokTableAdapter.Fill(this.dbDataSet.dok);
 
+
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet1.nomenklatura". При необходимости она может быть перемещена или удалена.
+            // this.nomenklaturaTableAdapter.Fill(this.dbDataSet1.nomenklatura);
+            LoadNomenklatura();
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.unit". При необходимости она может быть перемещена или удалена.
+            //this.unitTableAdapter.Fill(this.dbDataSet.unit);
+            LoadUnit();
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.user". При необходимости она может быть перемещена или удалена.
+            //this.userTableAdapter.Fill(this.dbDataSet.user);
+            LoadUsers();
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.client". При необходимости она может быть перемещена или удалена.
+            //this.clientTableAdapter.Fill(this.dbDataSet.client);
+            LoadClients();
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.goods". При необходимости она может быть перемещена или удалена.
+            // this.goodsTableAdapter.Fill(this.dbDataSet.goods);
+            LoadGoods();
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbDataSet.dok". При необходимости она может быть перемещена или удалена.
+            //this.dokTableAdapter.Fill(this.dbDataSet.dok);
+            LoadDok();
             Autoriz newForm = new Autoriz();
             newForm.Owner = this;
 
-            newForm.ShowDialog();
+            //newForm.ShowDialog();
 
         }
 
+        private void LoadUnit()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название, Сокращение FROM dbo.unit");
+            dataGridView4.DataSource = dataReaderBySql.GetDataSource();
+            dataGridView4.Columns[0].Visible = false;
+            dataReaderBySql.CloseDbConnection();
+            
+        }
+
+        private void RemoveUnit(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("delete from dbo.unit where Код=" + kod);
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadClients();
+        }
+
+        private void UpdateUnit(string id ,string name,string name2)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("update dbo.unit set Название=\'"+name+"\', Сокращение=\'" + name2 + "\'  where Код=\'" + id+"" );
+            dataGridView4.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadUnit();
+        }
+
+        private void InsertUnit(string name,string name2)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("insert into dbo.unit  (Название, Сокращение) values (\'"+name+"\',\'"+name2+"\')");
+            dataGridView4.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadUnit();
+        }
+
+        private void LoadDok()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Ид, Дата, Клиент, Кладовщик, Сумма, [Адрес Кл.], [Код Кл.] FROM dbo.dok");
+
+            dataGridView5.DataSource = dataReaderBySql.GetDataSource();
+
+            dataReaderBySql.CloseDbConnection();
+        }
+        private void RemoveDok(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("delete FROM dbo.dok where Код=\'"+kod+"\'");
+
+            dataGridView5.DataSource = dataReaderBySql.GetDataSource();
+
+            dataReaderBySql.CloseDbConnection();
+        }
+
+        private void LoadGoods()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название, [Хар-ка], [Ед Из], Цена, [Код Ед ИЗ] FROM dbo.goods");
+            dataGridView2.DataSource = dataReaderBySql.GetDataSource();
+            dataGridView2.Columns[0].Visible = false;
+            dataReaderBySql.CloseDbConnection();
+        }
+
+        private void RemoveGoods(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("delete from dbo.goods where Код=" + kod);
+            dataGridView6.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadGoods();
+        }
+
+        private void UpdateGoods(string kod, string name, string har, string unit, string prise,string unitId)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("update  dbo.goods set Название='" + name+ "\', [Хар-ка]='" + har+ "\', [Ед Из]='" + unit+ "\', Цена=\'" + prise
+                                                + "\',[Код Ед ИЗ]='" + unitId+ "\' where Код=\'" + kod+"\'");
+            dataGridView2.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadGoods();
+        }
+
+        private void InsertGoods(string name, string har, string unit, string prise, string unitId)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("insert into dbo.goods (Название, [Хар-ка], [Ед Из], Цена, [Код Ед ИЗ]) values (\'" + name 
+                                                                        + "\',\'"+har+"\',\'"+unit+"\',\'"+prise+"\',\'"+unitId+"\') ");
+            dataGridView2.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadGoods();
+        }
+        private void LoadClients()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Наименование, Телефон, Адрес FROM dbo.client");
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            
+            dataReaderBySql.CloseDbConnection();
+        }
+        private void RemoveClients(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("delete from dbo.client where Код=" + kod);
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadClients();
+        }
+
+        private void UpdateClient(string kod,string name,string tel,string adres)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("update dbo.client set Наименование=\'"+name+"\', Телефон=\'"+tel+"\', Адрес=\'"+adres+"\'  where Код=" + kod);
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadClients();
+        }
+
+        private void InsertClient(string name, string tel, string adres)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("insert into dbo.client (Наименование,Телефон,Адрес) values (\'"+name+"\',\'"+tel+"\',\'"+adres+"\')");
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadClients();
+        }
+
+        private void LoadUsers()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT        [Код], [Имя], [Фамилия], [Отчество], [Пароль], [Тел], [Адрес] FROM [user]");
+            dataGridView3.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+        }
+         private void RemoveUsers(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("delete from dbo.user where Код=" + kod);
+            dataGridView3.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadUsers();
+        }
+
+        private void UpdateUser(string id, string name,string family,string otch,string pas,string tel,string adres)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("update dbo.user set" +
+                                               "[Имя]=\'" + name + "\', [Фамилия]=\'" + family + "\', " +
+                                               "[Отчество]=\'" + otch + "\', [Пароль]=\'" + pas + "\', " +
+                                               "[Тел]=\'" + tel + "\', [Адрес] =\'" + adres+ "\' where" +
+                                               " [Код]=\'" + id + "\', ");
+            dataGridView3.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+        }
+
+        private void InsertUser(string name, string family, string otch, string pas, string tel, string adres)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("insert into dbo.user ([Имя], [Фамилия], [Отчество], [Пароль], [Тел], [Адрес]) " +
+                                               "values(\'"+name+"\',\'"+family+"\',\'"+otch+ "\',\'"+pas+"\',\'"+tel+"\',\'"+adres+"\')");
+            dataGridView3.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+        }
+
+        private void LoadNomenklatura()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT   Код, Наименование, Кол, [Ед Из], Цена, [Код Продукта], [Хар-ка], [Код Ед ИЗ], Стоимость, primary_sklad from dbo.nomenklatura");
+            dataGridView6.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+        }
+
+        private void RemoveNomenklatura(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("delete from dbo.nomenklatura where Код="+kod);
+            dataGridView6.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            LoadNomenklatura();
+        }
+
+        
         private void товарToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Goods newForm = new Goods();
@@ -84,66 +281,62 @@ namespace WindowsFormsApplication3
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            
             if (MessageBox.Show("Вы уверены что хотите удалить запись?", "Выйти?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                
                   
             if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Товар}"))
             {
-                if (dbDataSet.goods.Rows.Count > 0)
+                    //todo count(*)
+                if (dataGridView2.RowCount > 0)
                 {
-                    this.goodsTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.goods.Rows[goodsBindingSource.Position][0]));
-                    this.goodsTableAdapter.Update(this.dbDataSet.goods);
-                    this.goodsTableAdapter.Fill(this.dbDataSet.goods);
-
-                   
+                    var selectRowIndex = dataGridView2.SelectedCells[0].RowIndex;
+                    var selectedKod = dataGridView2.Rows[selectRowIndex].Cells[0].Value.ToString();
+                     RemoveGoods(selectedKod);
                 }
             }
             if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Клиенты}"))
             {
-                if (dbDataSet.client.Rows.Count > 0)
+                if (dataGridView1.RowCount > 0)
                 {
-                    this.clientTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.client.Rows[clientBindingSource.Position][0]));
-                    this.clientTableAdapter.Update(this.dbDataSet.client);
-                    this.clientTableAdapter.Fill(this.dbDataSet.client);
+                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        RemoveClients(selectedKod);
+                    }
+            }
+                if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Кладовщики}"))
+                {
+                    if (dataGridView3.RowCount > 0)
+                    {
+                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView3.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        RemoveUsers(selectedKod);
+                    }
+                }
+                if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Ед. Из.}"))
+                {
+                    if (dataGridView4.RowCount > 0)
+                    {
+                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView3.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        RemoveUnit(selectedKod);
+                    }
+
+                }
+                if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Накладные}"))
+                {
+                    if (dataGridView5.RowCount > 0)
+                    {
+                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView5.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        RemoveDok(selectedKod);
+
+
+                    }
                 }
             }
-            if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Кладовщики}"))
-            {
-                if (dbDataSet.user.Rows.Count > 0)
-                {
-                    this.userTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.user.Rows[userBindingSource.Position][0]));
-                    this.userTableAdapter.Update(this.dbDataSet.user);
-                    this.userTableAdapter.Fill(this.dbDataSet.user);
-                }
-            }
-            if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Ед. Из.}"))
-            {
-                if (dbDataSet.unit.Rows.Count > 0)
-                {
-                    this.unitTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.unit.Rows[unitBindingSource.Position][0]));
-                    this.unitTableAdapter.Update(this.dbDataSet.unit);
-                    this.unitTableAdapter.Fill(this.dbDataSet.unit);
-                }
-
-            }
-            if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Накладные}"))
-            {
-                if (dbDataSet.dok.Rows.Count > 0)
-                {
-
-                    this.nomenklaturaTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.dok.Rows[dokBindingSource.Position][0]));
-                    this.nomenklaturaTableAdapter.Update(this.dbDataSet1.nomenklatura);
-                    this.nomenklaturaTableAdapter.Fill(this.dbDataSet1.nomenklatura);
-
-                    this.dokTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.dok.Rows[dokBindingSource.Position][0]));
-                    this.dokTableAdapter.Update(this.dbDataSet.dok);
-                    this.dokTableAdapter.Fill(this.dbDataSet.dok);
-
-                  
-                }
-            }
-        } 
 
         }
 
@@ -154,74 +347,99 @@ namespace WindowsFormsApplication3
 
                 if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Товар}"))
                 {
-                    if (dbDataSet.goods.Rows.Count > 0)
-                    {//проверка чтобы не пытаться открыть пустые значения
+                    if (dataGridView2.RowCount > 0)
+                   {//проверка чтобы не пытаться открыть пустые значения
                         Goods newForm = new Goods();
                         newForm.Owner = this;
 
-                        String name = dbDataSet.goods.Rows[goodsBindingSource.Position][1].ToString();
-                        String har = dbDataSet.goods.Rows[goodsBindingSource.Position][2].ToString();
-                        String unit = dbDataSet.goods.Rows[goodsBindingSource.Position][3].ToString();
-                        String prise = dbDataSet.goods.Rows[goodsBindingSource.Position][4].ToString();
+                        var selectRowIndex = dataGridView2.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView2.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        
+                        String name = dataGridView2.Rows[selectRowIndex].Cells[1].Value.ToString();
+                        String har = dataGridView2.Rows[selectRowIndex].Cells[2].Value.ToString();
+                        String unit = dataGridView2.Rows[selectRowIndex].Cells[3].Value.ToString();
+                        String prise = dataGridView2.Rows[selectRowIndex].Cells[4].Value.ToString();
 
-                        newForm.Edit(Convert.ToInt32(dbDataSet.goods.Rows[goodsBindingSource.Position][0]), name, har, unit, prise);
+
+
+                        newForm.Edit(Convert.ToInt32(selectedKod), name, har, unit, prise);
                         newForm.ShowDialog();
                     }
                 }
                 if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Клиенты}"))
                 {
-                    if (dbDataSet.client.Rows.Count > 0)
+                    if (dataGridView1.RowCount > 0)
                     {
                         Client newForm = new Client();
                         newForm.Owner = this;
 
-                        String name = dbDataSet.client.Rows[clientBindingSource.Position][1].ToString();
-                        String tel = dbDataSet.client.Rows[clientBindingSource.Position][2].ToString();
-                        String adres = dbDataSet.client.Rows[clientBindingSource.Position][3].ToString();
+                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
 
-                        newForm.Edit(Convert.ToInt32(dbDataSet.client.Rows[clientBindingSource.Position][0]), name, tel, adres);
+                        String name = dataGridView1.Rows[selectRowIndex].Cells[1].Value.ToString();
+                        String tel = dataGridView1.Rows[selectRowIndex].Cells[2].Value.ToString();
+                        String adres = dataGridView1.Rows[selectRowIndex].Cells[3].Value.ToString();
+
+
+
+
+                        newForm.Edit(selectedKod, name, tel, adres);
                         newForm.ShowDialog();
                     }
                 }
                 if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Кладовщики}"))
                 {
-                    if (dbDataSet.user.Rows.Count > 0)
+                    if (dataGridView3.RowCount > 0)
                     {
                         User newForm = new User();
                         newForm.Owner = this;
 
-                        String name = dbDataSet.user.Rows[userBindingSource.Position][1].ToString();
-                        String family = dbDataSet.user.Rows[userBindingSource.Position][2].ToString();
-                        String otch = dbDataSet.user.Rows[userBindingSource.Position][3].ToString();
-                        String pas = dbDataSet.user.Rows[userBindingSource.Position][4].ToString();
-                        String tel = dbDataSet.user.Rows[userBindingSource.Position][5].ToString();
-                        String adres = dbDataSet.user.Rows[userBindingSource.Position][6].ToString();
+                        var selectRowIndex = dataGridView3.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView3.Rows[selectRowIndex].Cells[0].Value.ToString();
 
-                        newForm.Edit(Convert.ToInt32(dbDataSet.user.Rows[userBindingSource.Position][0]), name, family, otch, pas, tel, adres);
+                        String name = dataGridView3.Rows[selectRowIndex].Cells[1].Value.ToString();
+                        String family = dataGridView3.Rows[selectRowIndex].Cells[2].Value.ToString();
+                        String otch = dataGridView3.Rows[selectRowIndex].Cells[3].Value.ToString();
+                        String pas = dataGridView3.Rows[selectRowIndex].Cells[4].Value.ToString();
+                        String tel = dataGridView3.Rows[selectRowIndex].Cells[5].Value.ToString();
+                        String adres = dataGridView3.Rows[selectRowIndex].Cells[6].Value.ToString();
+
+                        newForm.Edit(selectedKod, name, family, otch, pas, tel, adres);
                         newForm.ShowDialog();
                     }
                 }
-                if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Ед. Из.}"))
+               if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Ед. Из.}"))
                 {
-                    if (dbDataSet.unit.Rows.Count > 0)
+                    if (dataGridView4.RowCount > 0)
                     {
                         Unit newForm = new Unit();
                         newForm.Owner = this;
 
-                        String name = dbDataSet.unit.Rows[unitBindingSource.Position][1].ToString();
-                        String name2 = dbDataSet.unit.Rows[unitBindingSource.Position][2].ToString();
+                        var selectRowIndex = dataGridView4.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView4.Rows[selectRowIndex].Cells[0].Value.ToString();
 
-                        newForm.Edit(Convert.ToInt32(dbDataSet.unit.Rows[unitBindingSource.Position][0]), name, name2);
+
+                        String name = dataGridView4.Rows[selectRowIndex].Cells[1].Value.ToString();
+                        String name2 = dataGridView4.Rows[selectRowIndex].Cells[2].Value.ToString(); 
+
+                        newForm.Edit(selectedKod, name, name2);
                         newForm.ShowDialog();
                     }
                 }
                 if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Накладные}"))
                 {
-                    if (dbDataSet.dok.Rows.Count > 0)
+                    if (dataGridView5.RowCount > 0)
                     {
-                        dokBindingSource.RemoveCurrent();
-                        this.dokTableAdapter.Update(this.dbDataSet.dok);
-                        this.dokTableAdapter.Fill(this.dbDataSet.dok);
+
+                        Dok newForm = new Dok();
+                        newForm.Owner = this;
+
+
+                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
+
+                        newForm.Edit();
+                        newForm.ShowDialog();
                     }
                 }
             }
@@ -229,7 +447,7 @@ namespace WindowsFormsApplication3
 
         public void setNewDok(object id, object date,object kodClient, object client, object adresClienta ,object user, object summa)
         {
-            DataRow r = dbDataSet.dok.NewRow();
+          /*  DataRow r = dbDataSet.dok.NewRow();
             r["Ид"] = id;
             r["Дата"] = date;
             r["Код Кл"] = kodClient;
@@ -245,99 +463,68 @@ namespace WindowsFormsApplication3
 
             this.nomenklaturaTableAdapter.Update(this.dbDataSet1.nomenklatura);
             this.nomenklaturaTableAdapter.Fill(this.dbDataSet1.nomenklatura);
-
+            */
         }
-        public void setNewUnit(String status, int id, String s1, String s2)
+        public void setNewUnit(String status, string id, String name, String name2)
         {
-
+            
 
             if (status.Equals("read"))
             {//если было редактирование
 
-                   this.unitTableAdapter.UpdateMyQuery(s1, s2, id);
+                   UpdateUnit(id,name, name2);
             }
             else
             {//если просто добавляем новое значение
-                DataRow r = dbDataSet.unit.NewRow();
-                r["Название"] = s1;
-                r["Сокращение"] = s2;
-                dbDataSet.unit.Rows.Add(r);
+                InsertUnit(name,name);
             }
-            // 
-
-        // 
-            this.unitTableAdapter.Update(this.dbDataSet.unit);
-            this.unitTableAdapter.Fill(this.dbDataSet.unit);
-
+            
         }
-        public void setNewUser(String status, int id, String s1, String s2, String s3, String s4, String s5, String s6)
+        public void setNewUser(String status, string id, string name, string family, string otch, string pas, string tel, string adres)
         {
             
      
             if (status.Equals("read"))
             {//если было редактирование
-                this.userTableAdapter.UpdateMyQuery(s1, s2, s3, s4, s5, s6, id);
+               UpdateUser(id, name, family, otch,pas, tel, adres);
             }
             else
             {//если просто добавляем новое значение
-                DataRow r = dbDataSet.user.NewRow();
-                r["Имя"] = s1;
-                r["Фамилия"] = s2;
-                r["Отчество"] = s3;
-                r["Пароль"] = s4;
-                r["Тел"] = s5;
-                r["Адрес"] = s6;
-                dbDataSet.user.Rows.Add(r);     
+                InsertUser(name, family, otch, pas, tel, adres);
             }
-            this.userTableAdapter.Update(this.dbDataSet.user);
-            this.userTableAdapter.Fill(this.dbDataSet.user);
-       
         }
-        public void setNewGoods(String status, int id, int kodEd, String s1, String s2, String s3, String s4)
+        public void setNewGoods(String status, int id, int kodEd, String name, String har, String unit, String prise, String unitId)
         {//Работа с таблицей после закрытия диалога добавления товара
            
             if (status.Equals("read"))
             {//если было редактирование
 
-                this.goodsTableAdapter.UpdateMyQuery(s1, s2, s3, s4, id);
+               UpdateGoods(id.ToString(),name,har,unit,prise, unitId);
             }
             else
             {//если просто добавляем новое значение
-                DataRow r = dbDataSet.goods.NewRow();
-                r["Название"] = s1;
-                r["Хар-ка"] = s2;
-                r["Код Ед ИЗ"] = kodEd;
-                r["Ед Из"] = s3;
-                r["Цена"] = s4;
-                dbDataSet.goods.Rows.Add(r);     
+                InsertGoods(name, har, unit, prise, unitId);
             }
-            this.goodsTableAdapter.Update(this.dbDataSet.goods);
-            this.goodsTableAdapter.Fill(this.dbDataSet.goods);
         }
-        public void setNewClient(String status, int id, String s1, String s2, String s3)
+        public void setNewClient(String status, String kod, String name, String tel, String adres)
         {
-            if (status.Equals("read"))
+           if (status.Equals("read"))
             {//если было редактирование
                
-                this.clientTableAdapter.UpdateMyQuery(s1, s2, s3, id);
+                UpdateClient(kod.ToString(), name, tel, adres);
             }
             else
             {//если просто добавляем новое значение
-                DataRow r = dbDataSet.client.NewRow();
-                r["Наименование"] = s1;
-                r["Телефон"] = s2;
-                r["Адрес"] = s3;
-                dbDataSet.client.Rows.Add(r);
+                InsertClient(name, tel, adres);
             }
-            this.clientTableAdapter.Update(this.dbDataSet.client);
-            this.clientTableAdapter.Fill(this.dbDataSet.client);
+            
         }
 
 
         public void ExportExсel(int id)
         {
 
-            this.nomenklaturaTableAdapter.Update(this.dbDataSet1.nomenklatura);
+        /*    this.nomenklaturaTableAdapter.Update(this.dbDataSet1.nomenklatura);
             this.nomenklaturaTableAdapter.Fill(this.dbDataSet1.nomenklatura);
             /////////////////////////Выгружаем в exel/////////////////////////////////////////////////////////
             Excel.Application exApp = new Excel.Application();
@@ -346,34 +533,14 @@ namespace WindowsFormsApplication3
             exApp.Visible = true;
             Worksheet workSheet = (Worksheet)exApp.ActiveSheet;
  
-        }
+ */       }
 
 
-        private void unitBindingSource_CurrentChanged(object sender, EventArgs e)
+
+
+        public void butOutDok_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void fillBy1ToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.userTableAdapter.Fill(this.dbDataSet.user);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private void dataGridView5_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void butOutDok_Click(object sender, EventArgs e)
-        {
+            /*
             if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Накладные}"))
             {
                 if (dbDataSet.dok.Rows.Count > 0)
@@ -435,13 +602,10 @@ namespace WindowsFormsApplication3
 
                 }
             }
-
+            */
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+       
 
         private void ShopForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -457,7 +621,5 @@ namespace WindowsFormsApplication3
             }
            
         }
-
-     
     }
 }

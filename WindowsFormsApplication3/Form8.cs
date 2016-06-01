@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication3;
 
 namespace shop
 {
@@ -21,16 +13,18 @@ namespace shop
             InitializeComponent();
             this.ControlBox = false;
 
-            this.userTableAdapter.Fill(this.dbDataSet1.user);
+            //this.userTableAdapter.Fill(this.dbDataSet1.user);
 
-            comboUser.DataSource = dbDataSet1.user;
+            //comboUser.DataSource = dbDataSet1.user;
             comboUser.DisplayMember ="Имя";
             comboUser.ValueMember = "Код";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String pas = dbDataSet1.user.Rows[Convert.ToInt32(comboUser.SelectedValue.ToString()) - 1]["Пароль"].ToString();
+            //
+
+            String pas = "";//dbDataSet1.user.Rows[Convert.ToInt32(comboUser.SelectedValue.ToString()) - 1]["Пароль"].ToString();
             if (textPas.Text.Equals(pas) || textPas.Text.Equals("0"))
             {
                 Autoriz.ActiveForm.Close();

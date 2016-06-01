@@ -36,11 +36,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.goodsTableAdapter = new shop.dbDataSetTableAdapters.goodsTableAdapter();
-            this.dbDataSet = new shop.dbDataSet();
+          
             this.label5 = new System.Windows.Forms.Label();
             this.goodsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).BeginInit();
+
             ((System.ComponentModel.ISupportInitialize)(this.goodsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +50,7 @@
             this.comboGoods.Name = "comboGoods";
             this.comboGoods.Size = new System.Drawing.Size(190, 21);
             this.comboGoods.TabIndex = 0;
-            this.comboGoods.SelectedIndexChanged += new System.EventHandler(this.comboGoods_SelectedIndexChanged);
+            
             this.comboGoods.Click += new System.EventHandler(this.comboBox1_Click);
             // 
             // textKol
@@ -60,8 +59,7 @@
             this.textKol.Name = "textKol";
             this.textKol.Size = new System.Drawing.Size(187, 20);
             this.textKol.TabIndex = 1;
-            this.textKol.TextChanged += new System.EventHandler(this.textKol_TextChanged);
-            this.textKol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textKol_KeyPress);
+            
             // 
             // label1
             // 
@@ -101,15 +99,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // goodsTableAdapter
-            // 
-            this.goodsTableAdapter.ClearBeforeFill = true;
-            // 
-            // dbDataSet
-            // 
-            this.dbDataSet.DataSetName = "dbDataSet";
-            this.dbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
+           
             // label5
             // 
             this.label5.AutoSize = true;
@@ -143,7 +133,7 @@
             this.MaximizeBox = false;
             this.Name = "AddGoods";
             this.Text = "Добавляем товар в накладную";
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).EndInit();
+         
             ((System.ComponentModel.ISupportInitialize)(this.goodsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -158,9 +148,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private dbDataSetTableAdapters.goodsTableAdapter goodsTableAdapter;
+        
         private System.Windows.Forms.BindingSource goodsBindingSource;
-        public dbDataSet dbDataSet;
+        
         private System.Windows.Forms.Label label5;
     }
 }

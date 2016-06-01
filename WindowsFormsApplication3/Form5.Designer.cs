@@ -35,10 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nameUnit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dbShop = new shop.dbDataSet();
-            this.unitTableAdapter = new shop.dbDataSetTableAdapters.unitTableAdapter();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dbShop)).BeginInit();
+         
             this.SuspendLayout();
             // 
             // nameUnit2
@@ -93,14 +91,10 @@
             this.label1.TabIndex = 17;
             this.label1.Text = "Наименование";
             // 
-            // dbShop
-            // 
-            this.dbShop.DataSetName = "dbDataSet";
-            this.dbShop.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
+        
             // unitTableAdapter
             // 
-            this.unitTableAdapter.ClearBeforeFill = true;
+       
             // 
             // label5
             // 
@@ -131,7 +125,7 @@
             this.MaximizeBox = false;
             this.Name = "Unit";
             this.Text = "Единицы измерения";
-            ((System.ComponentModel.ISupportInitialize)(this.dbShop)).EndInit();
+        
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,8 +139,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nameUnit;
         private System.Windows.Forms.Label label1;
-        private dbDataSet dbShop;
-        public dbDataSetTableAdapters.unitTableAdapter unitTableAdapter;
+        
         private System.Windows.Forms.Label label5;
     }
 }

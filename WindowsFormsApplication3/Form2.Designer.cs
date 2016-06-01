@@ -38,13 +38,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dbDataSet = new shop.dbDataSet();
             this.unitBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.unitTableAdapter = new shop.dbDataSetTableAdapters.unitTableAdapter();
             this.har = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unitBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +77,7 @@
             this.comboUnit.Name = "comboUnit";
             this.comboUnit.Size = new System.Drawing.Size(256, 21);
             this.comboUnit.TabIndex = 3;
-            this.comboUnit.Click += new System.EventHandler(this.unit_Click);
+            
             // 
             // price
             // 
@@ -119,19 +116,9 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dbDataSet
-            // 
-            this.dbDataSet.DataSetName = "dbDataSet";
-            this.dbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // unitBindingSource
             // 
             this.unitBindingSource.DataMember = "unit";
-            this.unitBindingSource.DataSource = this.dbDataSet;
-            // 
-            // unitTableAdapter
-            // 
-            this.unitTableAdapter.ClearBeforeFill = true;
             // 
             // har
             // 
@@ -183,7 +170,7 @@
             this.MaximizeBox = false;
             this.Name = "Goods";
             this.Text = "Товар";
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).EndInit();
+            this.Load += new System.EventHandler(this.Goods_Load);
             ((System.ComponentModel.ISupportInitialize)(this.unitBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -200,9 +187,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        public dbDataSet dbDataSet;
+        
         public System.Windows.Forms.BindingSource unitBindingSource;
-        public dbDataSetTableAdapters.unitTableAdapter unitTableAdapter;
+        
         private System.Windows.Forms.TextBox har;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication3;
+
 
 namespace shop
 {
     public partial class Client : Form
     {
-        public String Status = "";
-        public int idRead = 0;
+        public string Status = "";
+        public string idRead = "";
 
         public Client()
         {
@@ -40,7 +34,7 @@ namespace shop
             }
         }
 
-        public void Edit(int id, string name1, string tel1, string adres1)
+        public void Edit(string id, string name1, string tel1, string adres1)
         {//процедура заполняет поля значениями, при редактировании(вызывается из первой формы)
             idRead = id;
             Status = "read";
