@@ -47,7 +47,7 @@ namespace shop
             else
             {
                 Dok Dok = (Dok)this.Owner;
-                Dok.setNewAddGoods(Convert.ToInt32(comboGoods.SelectedIndex), Convert.ToInt32(textKol.Text.ToString()));
+                Dok.SetNewAddGoods(Convert.ToInt32(comboGoods.SelectedIndex), Convert.ToInt32(textKol.Text));
                 AddGoods.ActiveForm.Close();
             }
         }

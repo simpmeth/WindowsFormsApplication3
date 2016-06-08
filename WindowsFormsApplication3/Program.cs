@@ -45,6 +45,23 @@ namespace WindowsFormsApplication3
             return reader;
         }
 
+        public SqlDataReader void ExecuteSqlCommand(string sqlQuery)
+        {
+            if (sqlQuery.Length == 0) return null;
+            SqlCommand cmd = new SqlCommand();
+
+
+            cmd.CommandText = sqlQuery;
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = dbSqlConnection;
+
+            dbSqlConnection.Open();
+
+            reader = cmd.ExecuteReader();
+            
+           return
+        }
+
         public void CloseDbConnection()
         {
             dbSqlConnection.Close();

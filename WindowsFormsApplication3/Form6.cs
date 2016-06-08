@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Forms;
 using WindowsFormsApplication3;
 
@@ -15,16 +16,63 @@ namespace shop
 
         private void Dok_Load(object sender, EventArgs e)
         {
-          
+
 
             //labelId.Text = Convert.ToString(dbDataSet.dok.Count+1);
             //int i=dbDataSet.dok.Count;
             //labelKod.Text=Convert.ToString(dbDataSet.dok.Count+1);
-           // labelKod.Text = Convert.ToString(Convert.ToInt32(dbDataSet.dok.Rows[dbDataSet.dok.Count - 1]["Ид"].ToString()) + 1);
-           
+            // labelKod.Text = Convert.ToString(Convert.ToInt32(dbDataSet.dok.Rows[dbDataSet.dok.Count - 1]["Ид"].ToString()) + 1);
+
+            LoadSkald();
+
         }
 
-     
+        private void LoadSkald()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT [Код], [Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ] FROM dbo.sklad");
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataGridView1.Columns[0].Visible = false;
+            dataReaderBySql.CloseDbConnection();
+        }
+
+        private void RemoveSklad(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("delete FROM dbo.sklad where Код=\'"+kod+'\'');
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataGridView1.Columns[0].Visible = false;
+            dataReaderBySql.CloseDbConnection();
+
+            LoadSkald();
+        }
+
+
+        private void InsertSkald(string name, string count, string unit, string price, string priceGoods, string har, string kodGood,string UnitKod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("INSERT INTO [dbo].[sklad] ([Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ]) " +
+                                               "VALUES (\'\')");
+            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            
+            dataReaderBySql.CloseDbConnection();
+
+            LoadSkald();
+        }
+
+        private DataRow GetGoodsById(string kod)
+        {
+            
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название, [Хар-ка], [Ед Из], Цена, [Код Ед ИЗ] FROM dbo.goods where Код=\'"+kod+"\'");
+
+            var result = dataReaderBySql.GetDataSource();
+
+            dataReaderBySql.CloseDbConnection();
+            if (result.Rows.Count != 0) return result.Rows[0];
+            return null;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             AddGoods newForm = new AddGoods();
@@ -96,14 +144,22 @@ namespace shop
             ReloadUserData();
         }
         
-        public void setNewAddGoods(int indexGoods, int kolGoods)
+        public void SetNewAddGoods(string indexGoods, int kolGoods)
         {
-           /* int sum = Convert.ToInt32(Summa.Text.ToString());
-            int priceGoods = Convert.ToInt32(dbDataSet.goods.Rows[indexGoods]["Цена"].ToString());
+            int sum = Convert.ToInt32(Summa.Text);
+
+            var good=GetGoodsById(indexGoods);
+            if (good == null) return;
+
+            int priceGoods = Convert.ToInt32(good["Цена"]);
+
             int price = priceGoods * kolGoods;
             sum = sum + price;
             Summa.Text = sum.ToString();
 
+
+
+            
             DataRow r = dbDataSet.sklad.NewRow();
             r["Код Продукта"] = dbDataSet.goods.Rows[indexGoods]["Код"].ToString();
             r["Наименование"] = dbDataSet.goods.Rows[indexGoods]["Название"].ToString();
@@ -114,7 +170,8 @@ namespace shop
             r["Код Ед ИЗ"] = dbDataSet.goods.Rows[indexGoods]["Код Ед ИЗ"].ToString();
             r["Ед Из"] = dbDataSet.goods.Rows[indexGoods]["Ед Из"].ToString();
             
-            dbDataSet.sklad.Rows.Add(r);
+
+            /*dbDataSet.sklad.Rows.Add(r);
 
             this.skladTableAdapter.Update(this.dbDataSet.sklad);
             this.skladTableAdapter.Fill(this.dbDataSet.sklad);
@@ -162,21 +219,30 @@ namespace shop
 
         private void butDelete_Click(object sender, EventArgs e)
         {
-            /*
-            if (dbDataSet.sklad.Rows.Count > 0)
+            
+            if (dataGridView1.RowCount > 0)
             {
-                int sum = Convert.ToInt32(Summa.Text.ToString());
-                int priceGoods = Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position]["Цена"].ToString());
-                int kolGoods = Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position]["Кол"].ToString());
-                priceGoods = priceGoods * kolGoods;
-                sum = sum - priceGoods;
-                Summa.Text = sum.ToString();
+                var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
+                
+                RemoveSklad(selectedKod);
 
-                this.skladTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position][0]));
-                this.skladTableAdapter.Update(this.dbDataSet.sklad);
-                this.skladTableAdapter.Fill(this.dbDataSet.sklad);
+                /* int sum = Convert.ToInt32(Summa.Text.ToString());
+                 int priceGoods = Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position]["Цена"].ToString());
+                 int kolGoods = Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position]["Кол"].ToString());
+                 priceGoods = priceGoods * kolGoods;
+                 sum = sum - priceGoods;
+                 Summa.Text = sum.ToString();
+
+                 WTF??????
+
+                 */
+
+                /*    this.skladTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position][0]));
+                    this.skladTableAdapter.Update(this.dbDataSet.sklad);
+                    this.skladTableAdapter.Fill(this.dbDataSet.sklad);*/
             }
-            */
+            
         }
 
         private void Dok_FormClosed(object sender, FormClosedEventArgs e)

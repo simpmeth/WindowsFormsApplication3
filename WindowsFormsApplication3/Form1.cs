@@ -431,15 +431,16 @@ namespace WindowsFormsApplication3
                     if (dataGridView5.RowCount > 0)
                     {
 
-                        Dok newForm = new Dok();
+                        /*Dok newForm = new Dok();
                         newForm.Owner = this;
 
 
                         var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
-                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();*/
+                         //todo edit.eq.remove
 
-                        newForm.Edit();
-                        newForm.ShowDialog();
+                        /*newForm.Edit();
+                        newForm.ShowDialog();*/
                     }
                 }
             }
