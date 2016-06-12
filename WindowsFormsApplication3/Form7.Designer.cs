@@ -36,10 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-          
             this.label5 = new System.Windows.Forms.Label();
             this.goodsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-
             ((System.ComponentModel.ISupportInitialize)(this.goodsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +48,7 @@
             this.comboGoods.Name = "comboGoods";
             this.comboGoods.Size = new System.Drawing.Size(190, 21);
             this.comboGoods.TabIndex = 0;
-            
+            this.comboGoods.SelectedIndexChanged += new System.EventHandler(this.comboGoods_SelectedIndexChanged);
             this.comboGoods.Click += new System.EventHandler(this.comboBox1_Click);
             // 
             // textKol
@@ -59,7 +57,6 @@
             this.textKol.Name = "textKol";
             this.textKol.Size = new System.Drawing.Size(187, 20);
             this.textKol.TabIndex = 1;
-            
             // 
             // label1
             // 
@@ -99,7 +96,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-           
             // label5
             // 
             this.label5.AutoSize = true;
@@ -133,7 +129,6 @@
             this.MaximizeBox = false;
             this.Name = "AddGoods";
             this.Text = "Добавляем товар в накладную";
-         
             ((System.ComponentModel.ISupportInitialize)(this.goodsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

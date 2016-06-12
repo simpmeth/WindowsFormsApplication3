@@ -58,8 +58,7 @@ namespace WindowsFormsApplication3
         private void RemoveUnit(string kod)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("delete from dbo.unit where Код=" + kod);
-            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("delete from dbo.unit where Код=" + kod);
             dataReaderBySql.CloseDbConnection();
 
             LoadClients();
@@ -68,8 +67,7 @@ namespace WindowsFormsApplication3
         private void UpdateUnit(string id ,string name,string name2)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("update dbo.unit set Название=\'"+name+"\', Сокращение=\'" + name2 + "\'  where Код=\'" + id+"" );
-            dataGridView4.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("update dbo.unit set Название=\'"+name+"\', Сокращение=\'" + name2 + "\'  where Код=\'" + id+"\'" );
             dataReaderBySql.CloseDbConnection();
 
             LoadUnit();
@@ -78,8 +76,7 @@ namespace WindowsFormsApplication3
         private void InsertUnit(string name,string name2)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("insert into dbo.unit  (Название, Сокращение) values (\'"+name+"\',\'"+name2+"\')");
-            dataGridView4.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("insert into dbo.unit  (Название, Сокращение) values (\'"+name+"\',\'"+name2+"\')");
             dataReaderBySql.CloseDbConnection();
 
             LoadUnit();
@@ -97,11 +94,10 @@ namespace WindowsFormsApplication3
         private void RemoveDok(string kod)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("delete FROM dbo.dok where Код=\'"+kod+"\'");
-
-            dataGridView5.DataSource = dataReaderBySql.GetDataSource();
-
+            dataReaderBySql.DoSqlCommand("delete FROM dbo.dok where Код=\'"+kod+"\'");
             dataReaderBySql.CloseDbConnection();
+
+            LoadDok();
         }
 
         private void LoadGoods()
@@ -116,8 +112,7 @@ namespace WindowsFormsApplication3
         private void RemoveGoods(string kod)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("delete from dbo.goods where Код=" + kod);
-            dataGridView6.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("delete from dbo.goods where Код=" + kod);
             dataReaderBySql.CloseDbConnection();
 
             LoadGoods();
@@ -126,9 +121,8 @@ namespace WindowsFormsApplication3
         private void UpdateGoods(string kod, string name, string har, string unit, string prise,string unitId)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("update  dbo.goods set Название='" + name+ "\', [Хар-ка]='" + har+ "\', [Ед Из]='" + unit+ "\', Цена=\'" + prise
+            dataReaderBySql.DoSqlCommand("update  dbo.goods set Название='" + name+ "\', [Хар-ка]='" + har+ "\', [Ед Из]='" + unit+ "\', Цена=\'" + prise
                                                 + "\',[Код Ед ИЗ]='" + unitId+ "\' where Код=\'" + kod+"\'");
-            dataGridView2.DataSource = dataReaderBySql.GetDataSource();
             dataReaderBySql.CloseDbConnection();
 
             LoadGoods();
@@ -137,9 +131,8 @@ namespace WindowsFormsApplication3
         private void InsertGoods(string name, string har, string unit, string prise, string unitId)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("insert into dbo.goods (Название, [Хар-ка], [Ед Из], Цена, [Код Ед ИЗ]) values (\'" + name 
+            dataReaderBySql.DoSqlCommand("insert into dbo.goods (Название, [Хар-ка], [Ед Из], Цена, [Код Ед ИЗ]) values (\'" + name 
                                                                         + "\',\'"+har+"\',\'"+unit+"\',\'"+prise+"\',\'"+unitId+"\') ");
-            dataGridView2.DataSource = dataReaderBySql.GetDataSource();
             dataReaderBySql.CloseDbConnection();
 
             LoadGoods();
@@ -155,8 +148,7 @@ namespace WindowsFormsApplication3
         private void RemoveClients(string kod)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("delete from dbo.client where Код=" + kod);
-            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("delete from dbo.client where Код=" + kod);
             dataReaderBySql.CloseDbConnection();
 
             LoadClients();
@@ -165,8 +157,7 @@ namespace WindowsFormsApplication3
         private void UpdateClient(string kod,string name,string tel,string adres)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("update dbo.client set Наименование=\'"+name+"\', Телефон=\'"+tel+"\', Адрес=\'"+adres+"\'  where Код=" + kod);
-            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("update dbo.client set Наименование=\'"+name+"\', Телефон=\'"+tel+"\', Адрес=\'"+adres+"\'  where Код=" + kod);
             dataReaderBySql.CloseDbConnection();
 
             LoadClients();
@@ -175,8 +166,7 @@ namespace WindowsFormsApplication3
         private void InsertClient(string name, string tel, string adres)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("insert into dbo.client (Наименование,Телефон,Адрес) values (\'"+name+"\',\'"+tel+"\',\'"+adres+"\')");
-            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("insert into dbo.client (Наименование,Телефон,Адрес) values (\'"+name+"\',\'"+tel+"\',\'"+adres+"\')");
             dataReaderBySql.CloseDbConnection();
 
             LoadClients();
@@ -192,8 +182,7 @@ namespace WindowsFormsApplication3
          private void RemoveUsers(string kod)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("delete from dbo.user where Код=" + kod);
-            dataGridView3.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("delete from dbo.user where Код=" + kod);
             dataReaderBySql.CloseDbConnection();
 
             LoadUsers();
@@ -202,21 +191,19 @@ namespace WindowsFormsApplication3
         private void UpdateUser(string id, string name,string family,string otch,string pas,string tel,string adres)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("update dbo.user set" +
+            dataReaderBySql.DoSqlCommand("update dbo.user set" +
                                                "[Имя]=\'" + name + "\', [Фамилия]=\'" + family + "\', " +
                                                "[Отчество]=\'" + otch + "\', [Пароль]=\'" + pas + "\', " +
                                                "[Тел]=\'" + tel + "\', [Адрес] =\'" + adres+ "\' where" +
                                                " [Код]=\'" + id + "\', ");
-            dataGridView3.DataSource = dataReaderBySql.GetDataSource();
             dataReaderBySql.CloseDbConnection();
         }
 
         private void InsertUser(string name, string family, string otch, string pas, string tel, string adres)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("insert into dbo.user ([Имя], [Фамилия], [Отчество], [Пароль], [Тел], [Адрес]) " +
+            dataReaderBySql.DoSqlCommand("insert into dbo.user ([Имя], [Фамилия], [Отчество], [Пароль], [Тел], [Адрес]) " +
                                                "values(\'"+name+"\',\'"+family+"\',\'"+otch+ "\',\'"+pas+"\',\'"+tel+"\',\'"+adres+"\')");
-            dataGridView3.DataSource = dataReaderBySql.GetDataSource();
             dataReaderBySql.CloseDbConnection();
         }
 
@@ -231,14 +218,15 @@ namespace WindowsFormsApplication3
         private void RemoveNomenklatura(string kod)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("delete from dbo.nomenklatura where Код="+kod);
-            dataGridView6.DataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.DoSqlCommand("delete from dbo.nomenklatura where Код="+kod);
             dataReaderBySql.CloseDbConnection();
 
             LoadNomenklatura();
         }
 
-        
+       
+
+
         private void товарToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Goods newForm = new Goods();
@@ -431,16 +419,15 @@ namespace WindowsFormsApplication3
                     if (dataGridView5.RowCount > 0)
                     {
 
-                        /*Dok newForm = new Dok();
+                        Dok newForm = new Dok();
                         newForm.Owner = this;
 
 
                         var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
-                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();*/
-                         //todo edit.eq.remove
+                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
 
-                        /*newForm.Edit();
-                        newForm.ShowDialog();*/
+                       // newForm.Edit();
+                        newForm.ShowDialog();
                     }
                 }
             }

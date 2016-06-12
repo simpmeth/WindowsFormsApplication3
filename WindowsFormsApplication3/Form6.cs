@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Forms;
 using WindowsFormsApplication3;
 
@@ -22,56 +22,44 @@ namespace shop
             //int i=dbDataSet.dok.Count;
             //labelKod.Text=Convert.ToString(dbDataSet.dok.Count+1);
             // labelKod.Text = Convert.ToString(Convert.ToInt32(dbDataSet.dok.Rows[dbDataSet.dok.Count - 1]["Ид"].ToString()) + 1);
-
-            LoadSkald();
-
+            LoadSklad();
         }
 
-        private void LoadSkald()
+
+        private void LoadSklad()
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("SELECT [Код], [Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ] FROM dbo.sklad");
+            dataReaderBySql.GetDataReaderBySql("SELECT  [Код], [Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ] from dbo.sklad");
             dataGridView1.DataSource = dataReaderBySql.GetDataSource();
-            dataGridView1.Columns[0].Visible = false;
+            //if (dataGridView1.DataSource!=null) dataGridView1.Columns[0].Visible = false;
             dataReaderBySql.CloseDbConnection();
         }
-
-        private void RemoveSklad(string kod)
+        private void InsertSklad(string name, string count, string unit, string price, string kodProd, string summ, string har, string kodunit)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("delete FROM dbo.sklad where Код=\'"+kod+'\'');
-            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
-            dataGridView1.Columns[0].Visible = false;
+            dataReaderBySql.DoSqlCommand("INSERT INTO [dbo].[sklad] ([Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ])" +
+                                         " VALUES (\'" + name + "\', \'" + count + "\', \'" + unit + "\', \'" + price + "\', \'" + summ + "\',  \'" + har + "\',\'" + kodProd + "\', \'" + kodunit + "\')");
+
             dataReaderBySql.CloseDbConnection();
 
-            LoadSkald();
+            LoadSklad();
         }
 
-
-        private void InsertSkald(string name, string count, string unit, string price, string priceGoods, string har, string kodGood,string UnitKod)
+        private static void  ClearSklad()
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("INSERT INTO [dbo].[sklad] ([Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ]) " +
-                                               "VALUES (\'\')");
-            dataGridView1.DataSource = dataReaderBySql.GetDataSource();
-            
+            dataReaderBySql.DoSqlCommand("delete from dbo.sklad ");
             dataReaderBySql.CloseDbConnection();
-
-            LoadSkald();
         }
 
-        private DataRow GetGoodsById(string kod)
+        private  void RemoveSklad(string kodSklad)
         {
-            
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название, [Хар-ка], [Ед Из], Цена, [Код Ед ИЗ] FROM dbo.goods where Код=\'"+kod+"\'");
-
-            var result = dataReaderBySql.GetDataSource();
-
+            dataReaderBySql.DoSqlCommand("delete from dbo.sklad where [Код]=\'"+kodSklad+"\'");
             dataReaderBySql.CloseDbConnection();
-            if (result.Rows.Count != 0) return result.Rows[0];
-            return null;
+            LoadSklad();
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -84,15 +72,17 @@ namespace shop
         private void ReloadClientData()
         {
             var selectedItem = comboClient.SelectedItem as DataRowView;
-            labelAdresClient.Text = selectedItem.Row["Адрес"].ToString();
-            labelKodClient.Text = selectedItem.Row["Код"].ToString();
+            if (selectedItem != null)
+            {
+                labelAdresClient.Text = selectedItem.Row["Адрес"].ToString();
+                labelKodClient.Text = selectedItem.Row["Код"].ToString();
+            }
         }
 
         private void ReloadUserData()
         {
             var selectedItem = comboUser.SelectedItem as DataRowView;
-            labelAdresUser.Text = selectedItem.Row["Адрес"].ToString();
-            
+            if (selectedItem != null) labelAdresUser.Text = selectedItem.Row["Адрес"].ToString();
         }
 
 
@@ -143,39 +133,37 @@ namespace shop
 
             ReloadUserData();
         }
-        
-        public void SetNewAddGoods(string indexGoods, int kolGoods)
+
+        private DataRow GetGoodById(int indexGoods)
         {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("select [Код], [Название], [Хар-ка], [Ед Из], [Цена], [Код Ед ИЗ] from dbo.[goods] where [Код]=\'" +
+            indexGoods.ToString() + "\'");
+
+            var source = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            if (source.Rows.Count>0)
+            {
+                return source.Rows[0];
+            }
+            return null;
+        }
+
+        public void setNewAddGoods(int indexGoods, int kolGoods)
+        {
+
+            var good = GetGoodById(indexGoods);
+            
             int sum = Convert.ToInt32(Summa.Text);
-
-            var good=GetGoodsById(indexGoods);
-            if (good == null) return;
-
-            int priceGoods = Convert.ToInt32(good["Цена"]);
-
+            var priceGoods = Convert.ToInt32(good["Цена"]);
             int price = priceGoods * kolGoods;
             sum = sum + price;
             Summa.Text = sum.ToString();
 
 
-
-            
-            DataRow r = dbDataSet.sklad.NewRow();
-            r["Код Продукта"] = dbDataSet.goods.Rows[indexGoods]["Код"].ToString();
-            r["Наименование"] = dbDataSet.goods.Rows[indexGoods]["Название"].ToString();
-            r["Хар-ка"] = dbDataSet.goods.Rows[indexGoods]["Хар-ка"].ToString();
-            r["Кол"] = kolGoods;
-            r["Цена"] = priceGoods;
-            r["Стоимость"] = price;
-            r["Код Ед ИЗ"] = dbDataSet.goods.Rows[indexGoods]["Код Ед ИЗ"].ToString();
-            r["Ед Из"] = dbDataSet.goods.Rows[indexGoods]["Ед Из"].ToString();
-            
-
-            /*dbDataSet.sklad.Rows.Add(r);
-
-            this.skladTableAdapter.Update(this.dbDataSet.sklad);
-            this.skladTableAdapter.Fill(this.dbDataSet.sklad);
-            */
+            InsertSklad(good["Название"].ToString(), kolGoods.ToString(), good["Ед Из"].ToString(),priceGoods.ToString(),
+                            indexGoods.ToString(), sum.ToString(), good["Хар-ка"].ToString(), good["Код Ед ИЗ"].ToString());
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -219,54 +207,34 @@ namespace shop
 
         private void butDelete_Click(object sender, EventArgs e)
         {
-            
-            if (dataGridView1.RowCount > 0)
+
+            if (dataGridView1.Rows.Count > 0)
             {
+
                 var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
                 var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
                 
+
+                int sum = Convert.ToInt32(Summa.Text);
+                
+                var priceGoods = Convert.ToInt32( dataGridView1.Rows[selectRowIndex].Cells[5].Value.ToString() );
+                sum = sum - priceGoods;
+                Summa.Text = sum.ToString();
+
                 RemoveSklad(selectedKod);
-
-                /* int sum = Convert.ToInt32(Summa.Text.ToString());
-                 int priceGoods = Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position]["Цена"].ToString());
-                 int kolGoods = Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position]["Кол"].ToString());
-                 priceGoods = priceGoods * kolGoods;
-                 sum = sum - priceGoods;
-                 Summa.Text = sum.ToString();
-
-                 WTF??????
-
-                 */
-
-                /*    this.skladTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position][0]));
-                    this.skladTableAdapter.Update(this.dbDataSet.sklad);
-                    this.skladTableAdapter.Fill(this.dbDataSet.sklad);*/
             }
             
         }
 
         private void Dok_FormClosed(object sender, FormClosedEventArgs e)
         {
-          /*  if (dbDataSet.sklad.Rows.Count > 0)
+            if (dataGridView1.Rows.Count > 0)
             {
-                for (int i = 0; i <= dbDataSet.sklad.Rows.Count; i++)
-                {//очищает таблицу
-                   // label7.Text = Convert.ToString(dbDataSet.sklad.Rows.Count);
-                    this.skladTableAdapter.DeleteMyQuery(Convert.ToInt32(dbDataSet.sklad.Rows[skladBindingSource.Position][0]));
-                    this.skladTableAdapter.Update(this.dbDataSet.sklad);
-                    this.skladTableAdapter.Fill(this.dbDataSet.sklad);
-                }
+                ClearSklad();
             }
-*/        }
-
-        public void Edit()
-        {//процедура заполняет поля значениями, при редактировании(вызывается из первой формы)
-            /*idRead = id;
-            Status = "read";
-            nameUnit.Text = name1;
-            nameUnit2.Text = name2;
-            */
         }
+
+        
 
         private void comboClient_SelectedIndexChanged(object sender, EventArgs e)
         {

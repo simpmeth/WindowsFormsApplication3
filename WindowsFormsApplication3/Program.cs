@@ -22,57 +22,68 @@ namespace WindowsFormsApplication3
 
     public class DataReaderBySql
     {
-        public SqlConnection dbSqlConnection;
-        public SqlDataReader reader;
+        public SqlConnection DbSqlConnection;
+        public SqlDataReader Reader;
+        public SqlCommand cmd;
         public DataReaderBySql()
         {
-            dbSqlConnection= new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\""+Application.StartupPath+"\\sql.mdf\";Integrated Security=True;Connect Timeout=30;Context Connection=False");
+            DbSqlConnection= new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + Application.StartupPath + "\\sql.mdf\";Integrated Security = True; Connect Timeout = 30");
         }
-
         public SqlDataReader GetDataReaderBySql(string sqlQuery) 
         {
             if (sqlQuery.Length==0) return null; 
-            SqlCommand cmd = new SqlCommand();
+            cmd = new SqlCommand();
             
-
             cmd.CommandText = sqlQuery;
             cmd.CommandType = CommandType.Text;
-            cmd.Connection = dbSqlConnection;
+            cmd.Connection = DbSqlConnection;
 
-            dbSqlConnection.Open();
+            DbSqlConnection.Open();
 
-            reader = cmd.ExecuteReader();
-            return reader;
+            Reader = cmd.ExecuteReader();
+
+
+            return Reader;
         }
 
-        public SqlDataReader void ExecuteSqlCommand(string sqlQuery)
+        public int DoSqlCommand(string sqlQuery)
         {
-            if (sqlQuery.Length == 0) return null;
-            SqlCommand cmd = new SqlCommand();
-
+            cmd = new SqlCommand();
 
             cmd.CommandText = sqlQuery;
             cmd.CommandType = CommandType.Text;
-            cmd.Connection = dbSqlConnection;
+            cmd.Connection = DbSqlConnection;
 
-            dbSqlConnection.Open();
+            if (sqlQuery.Length == 0) return 0;
 
-            reader = cmd.ExecuteReader();
-            
-           return
+           
+            try
+            {   
+                cmd.Connection.Open();
+                var countAff =  cmd.ExecuteReader().RecordsAffected;
+                cmd.Connection.Close();
+                
+                return countAff;
+            }
+            catch(Exception e)
+            {
+                var exception = e;
+                return -1; 
+            }
+
         }
 
         public void CloseDbConnection()
         {
-            dbSqlConnection.Close();
+            DbSqlConnection.Close();
         }
 
         public DataTable GetDataSource()
         {
-            if (!reader.HasRows) return null;
+            if (!Reader.HasRows) return null;
 
             var dt = new DataTable();
-            dt.Load(reader);
+            dt.Load(Reader);
             return dt;
         }
     }

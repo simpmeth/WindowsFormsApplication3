@@ -17,7 +17,7 @@ namespace shop
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Unit.ActiveForm.Close();
+            Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,7 +30,7 @@ namespace shop
             {
                 ShopForm a = (ShopForm)this.Owner;
                 a.setNewUnit(Status, idRead, nameUnit.Text, nameUnit2.Text);
-                Unit.ActiveForm.Close();
+                Close();
             }
         }
 
