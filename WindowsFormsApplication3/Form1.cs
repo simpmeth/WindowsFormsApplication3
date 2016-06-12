@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Collections.Generic;
 
 namespace WindowsFormsApplication3
 {
@@ -228,10 +229,20 @@ namespace WindowsFormsApplication3
             dataReaderBySql.CloseDbConnection();
         }
 
+        public DataRowCollection GetNomenklatura(string dokId)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql("SELECT   Код, Наименование, Кол, [Ед Из], Цена, [Код Продукта], [Хар-ка], [Код Ед ИЗ], Стоимость, primary_sklad from dbo.nomenklatura where primary_sklad=\'" + dokId + "\'");
+            var dataSource = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            return dataSource.Rows;
+        }
+
         private void RemoveNomenklatura(string kod)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.DoSqlCommand("delete from dbo.nomenklatura where Код="+kod);
+            dataReaderBySql.DoSqlCommand("delete from dbo.nomenklatura where primary_sklad=\'"+kod+"\'");
             dataReaderBySql.CloseDbConnection();
 
             LoadNomenklatura();
@@ -312,7 +323,7 @@ namespace WindowsFormsApplication3
                 {
                     if (dataGridView3.RowCount > 0)
                     {
-                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectRowIndex = dataGridView3.SelectedCells[0].RowIndex;
                         var selectedKod = dataGridView3.Rows[selectRowIndex].Cells[0].Value.ToString();
                         RemoveUsers(selectedKod);
                     }
@@ -321,8 +332,8 @@ namespace WindowsFormsApplication3
                 {
                     if (dataGridView4.RowCount > 0)
                     {
-                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
-                        var selectedKod = dataGridView3.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        var selectRowIndex = dataGridView4.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView4.Rows[selectRowIndex].Cells[0].Value.ToString();
                         RemoveUnit(selectedKod);
                     }
 
@@ -331,7 +342,7 @@ namespace WindowsFormsApplication3
                 {
                     if (dataGridView5.RowCount > 0)
                     {
-                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        var selectRowIndex = dataGridView5.SelectedCells[0].RowIndex;
                         var selectedKod = dataGridView5.Rows[selectRowIndex].Cells[0].Value.ToString();
                         RemoveDok(selectedKod);
 
@@ -437,11 +448,13 @@ namespace WindowsFormsApplication3
                         newForm.Owner = this;
                         var selectRowIndex = dataGridView5.SelectedCells[0].RowIndex;
                         var selectedKod = dataGridView5.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        var selectedDok = dataGridView5.Rows[selectRowIndex].Cells[1].Value.ToString();
                         RemoveDok(selectedKod);
-                     // var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
-                       // 
+                        RemoveNomenklatura(selectedDok);
+                        // var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                        // 
 
-                       // newForm.Edit();
+                        // newForm.Edit();
                         //newForm.ShowDialog();
                     }
                 }
@@ -510,92 +523,73 @@ namespace WindowsFormsApplication3
             
         }
 
-
-        public void ExportExсel(int id)
-        {
-
-        /*    this.nomenklaturaTableAdapter.Update(this.dbDataSet1.nomenklatura);
-            this.nomenklaturaTableAdapter.Fill(this.dbDataSet1.nomenklatura);
-            /////////////////////////Выгружаем в exel/////////////////////////////////////////////////////////
-            Excel.Application exApp = new Excel.Application();
-            
-            exApp.Workbooks.Open(Environment.CurrentDirectory + "\\" + "Накладная.xlsx");   //Add();
-            exApp.Visible = true;
-            Worksheet workSheet = (Worksheet)exApp.ActiveSheet;
- 
- */       }
-
+        
 
 
 
         public void butOutDok_Click(object sender, EventArgs e)
         {
-            /*
+            
             if (tabControl1.SelectedTab.ToString().Equals("TabPage: {Накладные}"))
             {
-                if (dbDataSet.dok.Rows.Count > 0)
+                if (dataGridView5.Rows.Count > 0)
                 {
-                    //     ExportExel(Convert.ToInt32(dbDataSet.unit.Rows[unitBindingSource.Position][0]));
-                    this.nomenklaturaTableAdapter.Update(this.dbDataSet.nomenklatura);
-                    this.nomenklaturaTableAdapter.Fill(this.dbDataSet.nomenklatura);
+                     
+                    var selectRowIndex = dataGridView5.SelectedCells[0].RowIndex;
+                    var selectRow = dataGridView5.Rows[selectRowIndex];
+                    var kodDok = selectRow.Cells[1].Value.ToString();
+                   
+                    var listDataRows = GetNomenklatura(kodDok);
 
-                    Excel.Application exApp = new Excel.Application();
+                      Excel.Application exApp = new Excel.Application();
 
-                    exApp.Workbooks.Open(Environment.CurrentDirectory + "\\" + "Накладная.xlsx");   //Add();
-                    exApp.Visible = true;
-                    Worksheet workSheet = (Worksheet)exApp.ActiveSheet;
-                    workSheet.Cells[1, "E"] = dbDataSet.dok.Rows[dokBindingSource.Position]["Код"];//код нвкладной общий
-                    workSheet.Cells[2, "E"] = dbDataSet.dok.Rows[dokBindingSource.Position]["Ид"];
-                    workSheet.Cells[3, "E"] = dbDataSet.dok.Rows[dokBindingSource.Position]["Дата"];
-                    workSheet.Cells[4, "E"] = dbDataSet.dok.Rows[dokBindingSource.Position]["Клиент"];
-                    workSheet.Cells[5, "E"] = dbDataSet.dok.Rows[dokBindingSource.Position]["Адрес Кл"];//адрес
-                    workSheet.Cells[6, "E"] = dbDataSet.dok.Rows[dokBindingSource.Position]["Код Кл"];//код
-
+                      exApp.Workbooks.Open(Environment.CurrentDirectory + "\\" + "Накладная.xlsx");   //Add();
+                      exApp.Visible = true;
+                      Worksheet workSheet = (Worksheet)exApp.ActiveSheet;
+                    
+                    workSheet.Cells[1, "E"] = selectRow.Cells[0].Value.ToString();
+                    workSheet.Cells[2, "E"] = selectRow.Cells[1].Value.ToString();
+                    workSheet.Cells[3, "E"] = selectRow.Cells[2].Value.ToString();
+                    workSheet.Cells[4, "E"] = selectRow.Cells[3].Value.ToString();
+                    workSheet.Cells[5, "E"] = selectRow.Cells[6].Value.ToString();
+                    workSheet.Cells[6, "E"] = selectRow.Cells[0].Value.ToString();
 
                     int numberR = 12;//номер строки с которой заполняется наменклатура
                     int numberColm = 1;//номер в екселе строка с товаром
-                    int id_dok = Convert.ToInt32(dbDataSet.dok.Rows[dokBindingSource.Position]["Код"]);
+                    
                     int kol=0;
                     int sum = 0;
-                    for (int i = 0; i <= dbDataSet.nomenklatura.Rows.Count - 1; i++)
-                    {//заносим табличные значения
-                        int id_nom = Convert.ToInt32(dbDataSet.nomenklatura.Rows[i]["primary_sklad"]);
+                    for (int i = 0; i <= listDataRows.Count - 1; i++)
+                      {//заносим табличные значения
+                          
+                              kol=kol+Convert.ToInt32(listDataRows[i][2].ToString());
+                              sum = sum + Convert.ToInt32(listDataRows[i][8].ToString());
+
+                              workSheet.Rows[numberR].Insert(Excel.XlInsertShiftDirection.xlShiftDown);//вставляем новую строку
+                              workSheet.Cells[numberR, "A"] = numberColm;//код нвкладной общий
+                              workSheet.Cells[numberR, "B"] = listDataRows[i][1].ToString();
+                              //workSheet.Cells[numberR, "С"] = listDataRows[i][5].ToString();
+                              workSheet.Cells[numberR, "D"] = listDataRows[i][6].ToString();
+                              workSheet.Cells[numberR, "E"] = listDataRows[i][2].ToString();
+                              workSheet.Cells[numberR, "F"] = listDataRows[i][7].ToString();
+                              workSheet.Cells[numberR, "G"] = listDataRows[i][3].ToString();
+                              workSheet.Cells[numberR, "H"] = listDataRows[i][4].ToString();
+                              workSheet.Cells[numberR, "I"] = listDataRows[i][8].ToString();
+                              numberColm++;
+                              numberR++;
+                          
+                      }
                         
-
-                        if (id_dok == id_nom)
-                        {
-                            kol=kol+Convert.ToInt32(dbDataSet.nomenklatura.Rows[i]["Кол"]);
-                            sum = sum + Convert.ToInt32(dbDataSet.nomenklatura.Rows[i]["Стоимость"]);
-
-                            workSheet.Rows[numberR].Insert(Excel.XlInsertShiftDirection.xlShiftDown);//вставляем новую строку
-                            workSheet.Cells[numberR, "A"] = numberColm;//код нвкладной общий
-                            workSheet.Cells[numberR, "B"] = dbDataSet.nomenklatura.Rows[i]["Наименование"];
-                          //  workSheet.Cells[numberR, "С"] = dbDataSet.nomenklatura.Rows[i][5].ToString();
-                            workSheet.Cells[numberR, "D"] = dbDataSet.nomenklatura.Rows[i]["Хар-ка"];
-                            workSheet.Cells[numberR, "E"] = dbDataSet.nomenklatura.Rows[i]["Кол"];
-                            workSheet.Cells[numberR, "F"] = dbDataSet.nomenklatura.Rows[i]["Код Ед Из"];
-                            workSheet.Cells[numberR, "G"] = dbDataSet.nomenklatura.Rows[i]["Ед Из"];
-                            workSheet.Cells[numberR, "H"] = dbDataSet.nomenklatura.Rows[i]["Цена"];
-                            workSheet.Cells[numberR, "I"] = dbDataSet.nomenklatura.Rows[i]["Стоимость"];
-                            
-                           
-
-                           
-                            numberColm++;
-                            numberR++;
-                        }
-                    }//конец цыкла
-
-                    workSheet.Cells[numberR, "E"] = kol.ToString();//общее колличевство
-                    workSheet.Cells[numberR, "I"] = sum.ToString();//общая сумма
-                    workSheet.Cells[numberR + 1, "G"] = dbDataSet.dok.Rows[dokBindingSource.Position]["Кладовщик"];
-
+                      workSheet.Cells[numberR, "E"] = kol.ToString();//общее колличевство
+                      workSheet.Cells[numberR, "I"] = sum.ToString();//общая сумма
+                      workSheet.Cells[numberR + 1, "G"] = selectRow.Cells[4].Value.ToString(); //кладовщик
+                      
                 }
             }
-            */
+            
         }
 
-       
+
 
         private void ShopForm_FormClosing(object sender, FormClosingEventArgs e)
         {

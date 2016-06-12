@@ -43,6 +43,7 @@
             // 
             // comboGoods
             // 
+            this.comboGoods.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboGoods.FormattingEnabled = true;
             this.comboGoods.Location = new System.Drawing.Point(13, 33);
             this.comboGoods.Name = "comboGoods";
