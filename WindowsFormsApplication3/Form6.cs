@@ -17,49 +17,106 @@ namespace shop
         private void Dok_Load(object sender, EventArgs e)
         {
 
+            labelId.Text = Convert.ToString(GetLastDokId() + 1);
+            
 
-            //labelId.Text = Convert.ToString(dbDataSet.dok.Count+1);
-            //int i=dbDataSet.dok.Count;
-            //labelKod.Text=Convert.ToString(dbDataSet.dok.Count+1);
-            // labelKod.Text = Convert.ToString(Convert.ToInt32(dbDataSet.dok.Rows[dbDataSet.dok.Count - 1]["Ид"].ToString()) + 1);
+
+
+            /////////////////////////
+            labelId.Text = Convert.ToString(GetLastDokId() + 1);
+            
+            labelKod.Text=Convert.ToString(GetLastDokId() + 1);
+            
+
             LoadSklad();
         }
 
+
+
+        private int GetLastDokId()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql(
+                "select ISNULL((select avg(Код) from dbo.dok group by [Код]),0)  as maxid");
+
+            var source = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            if (source.Rows.Count > 0)
+            {
+                return (int) source.Rows[0]["maxid"];
+            }
+            return 0;
+        }
+        private int GetRowCountDok()
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.GetDataReaderBySql(
+                "select ISNULL((select count(Код) from dbo.dok group by [Код]),0)  as dokcount");
+
+            var source = dataReaderBySql.GetDataSource();
+            dataReaderBySql.CloseDbConnection();
+
+            if (source.Rows.Count > 0)
+            {
+                return (int)source.Rows[0]["dokcount"];
+            }
+            return 0;
+        }
 
         private void LoadSklad()
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("SELECT  [Код], [Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ] from dbo.sklad");
+            dataReaderBySql.GetDataReaderBySql(
+                "SELECT  [Код], [Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], " +
+                "[Код Продукта], [Код Ед ИЗ] from dbo.sklad");
             dataGridView1.DataSource = dataReaderBySql.GetDataSource();
             //if (dataGridView1.DataSource!=null) dataGridView1.Columns[0].Visible = false;
             dataReaderBySql.CloseDbConnection();
         }
-        private void InsertSklad(string name, string count, string unit, string price, string kodProd, string summ, string har, string kodunit)
+
+        private void InsertSklad(string name, string count, string unit, string price, string kodProd, string summ,
+            string har, string kodunit)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.DoSqlCommand("INSERT INTO [dbo].[sklad] ([Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ])" +
-                                         " VALUES (\'" + name + "\', \'" + count + "\', \'" + unit + "\', \'" + price + "\', \'" + summ + "\',  \'" + har + "\',\'" + kodProd + "\', \'" + kodunit + "\')");
+            dataReaderBySql.DoSqlCommand(
+                "INSERT INTO [dbo].[sklad] ([Наименование], [Кол], [Ед Из], [Цена], [Стоимость], [Хар-ка], [Код Продукта], [Код Ед ИЗ])" +
+                " VALUES (\'" + name + "\', \'" + count + "\', \'" + unit + "\', \'" + price + "\', \'" + summ +
+                "\',  \'" + har + "\',\'" + kodProd + "\', \'" + kodunit + "\')");
 
             dataReaderBySql.CloseDbConnection();
 
             LoadSklad();
         }
 
-        private static void  ClearSklad()
+        private static void ClearSklad()
         {
             var dataReaderBySql = new DataReaderBySql();
             dataReaderBySql.DoSqlCommand("delete from dbo.sklad ");
             dataReaderBySql.CloseDbConnection();
         }
 
-        private  void RemoveSklad(string kodSklad)
+        private void RemoveSklad(string kodSklad)
         {
             var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.DoSqlCommand("delete from dbo.sklad where [Код]=\'"+kodSklad+"\'");
+            dataReaderBySql.DoSqlCommand("delete from dbo.sklad where [Код]=\'" + kodSklad + "\'");
             dataReaderBySql.CloseDbConnection();
             LoadSklad();
         }
 
+        private void CreateNomenkulatura(string kod)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.DoSqlCommand("INSERT INTO [dbo].[nomenklatura] (" +
+                                         " [Наименование], [Кол], [Ед Из], [Цена],[Стоимость], " +
+                                         "[Код Продукта], [Хар-ка], [Код Ед ИЗ], [primary_sklad])" +
+                                         " " +
+                                         "SELECT [Наименование], [Кол], [Ед Из], [Цена], [Стоимость]," +
+                                         " [Код Продукта],[Хар-ка], [Код Ед ИЗ], \'"+kod+"\' " +
+                                         "from dbo.sklad");
+            dataReaderBySql.CloseDbConnection();
+            ClearSklad();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -93,7 +150,6 @@ namespace shop
 
         private void comboUser_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            // labelAdresUser.Text = dbDataSet.user.Rows[Convert.ToInt32(comboUser.SelectedValue.ToString()) - 1]["Адрес"].ToString();
             ReloadUserData();
         }
 
@@ -118,10 +174,6 @@ namespace shop
 
         private void comboUser_Click(object sender, EventArgs e)
         {
-            /*comboUser.DataSource = dbDataSet.user;
-            comboUser.DisplayMember = "Фамилия";
-            comboUser.ValueMember = "Код";*/
-
             var dataReaderBySql = new DataReaderBySql();
             dataReaderBySql.GetDataReaderBySql("SELECT        [Код], [Имя], [Фамилия], [Отчество], [Пароль], [Тел], [Адрес] FROM [user]");
             comboUser.DataSource = dataReaderBySql.GetDataSource();
@@ -138,7 +190,7 @@ namespace shop
         {
             var dataReaderBySql = new DataReaderBySql();
             dataReaderBySql.GetDataReaderBySql("select [Код], [Название], [Хар-ка], [Ед Из], [Цена], [Код Ед ИЗ] from dbo.[goods] where [Код]=\'" +
-            indexGoods.ToString() + "\'");
+            indexGoods + "\'");
 
             var source = dataReaderBySql.GetDataSource();
             dataReaderBySql.CloseDbConnection();
@@ -168,41 +220,25 @@ namespace shop
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-          /*  if (comboClient.Text == "" || comboUser.Text == "" || dbDataSet.sklad.Rows.Count < 1)
+            if (comboClient.Text == "" || comboUser.Text == "" || dataGridView1.Rows.Count < 1)
             {
                 label7.Visible = true;
             }
             else
             {
 
-                // label7.Text = dbDataSet.sklad.Rows.Count.ToString();
-                for (int i = 0; i <= dbDataSet.sklad.Rows.Count - 1; i++)
-                {//заносим табличные значения
+                // label7.Text = dataGridView1.Rows.Count.ToString();
+                //sklad - >nomen
+                var dokkod = labelKod.Text;
+                CreateNomenkulatura(dokkod);
+                ShopForm shop = (ShopForm) this.Owner;
+                shop.setNewDok(dokkod, date.Text, labelKodClient.Text, comboClient.Text, labelAdresClient.Text,
+                    comboUser.Text, Summa.Text);
 
-                    DataRow r = dbDataSet.nomenklatura.NewRow();
-                    r["Код Продукта"] = dbDataSet.sklad.Rows[i]["Код Продукта"].ToString();
-                    r["Наименование"] = dbDataSet.sklad.Rows[i]["Наименование"].ToString();
-                    r["Хар-ка"] = dbDataSet.sklad.Rows[i]["Хар-ка"].ToString();
-                    r["Кол"] = dbDataSet.sklad.Rows[i]["Кол"].ToString();
-                    r["Цена"] = dbDataSet.sklad.Rows[i]["Цена"].ToString();
-                    r["Стоимость"] = dbDataSet.sklad.Rows[i]["Стоимость"].ToString();
-                    r["Код Ед Из"] = dbDataSet.sklad.Rows[i]["Код Ед ИЗ"].ToString();
-                    r["Ед Из"] = dbDataSet.sklad.Rows[i]["Ед Из"].ToString();
-                    r["primary_sklad"] = Convert.ToInt32(labelId.Text.ToString());
-
-                    dbDataSet.nomenklatura.Rows.Add(r);
-
-                    this.nomenklaturaTableAdapter.Update(this.dbDataSet.nomenklatura);
-                    this.nomenklaturaTableAdapter.Fill(this.dbDataSet.nomenklatura);
-
-                }
-                ShopForm shop = (ShopForm)this.Owner;
-                shop.setNewDok(labelKod.Text, date.Text, labelKodClient.Text, comboClient.Text, labelAdresClient.Text, comboUser.Text, Summa.Text);
-                this.Close();
+                Close();
+                shop.LoadNomenklatura();
+                shop.LoadDok();
             }
-
-    */
-
         }
 
         private void butDelete_Click(object sender, EventArgs e)

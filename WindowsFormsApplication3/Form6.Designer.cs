@@ -101,12 +101,12 @@
             // 
             // comboClient
             // 
+            this.comboClient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboClient.FormattingEnabled = true;
             this.comboClient.Location = new System.Drawing.Point(15, 98);
             this.comboClient.Name = "comboClient";
             this.comboClient.Size = new System.Drawing.Size(197, 21);
             this.comboClient.TabIndex = 3;
-            this.comboClient.Text = "  ";
             this.comboClient.SelectedIndexChanged += new System.EventHandler(this.comboClient_SelectedIndexChanged);
             this.comboClient.SelectionChangeCommitted += new System.EventHandler(this.comboClient_SelectionChangeCommitted);
             this.comboClient.Click += new System.EventHandler(this.comboClient_Click);
@@ -182,6 +182,7 @@
             // 
             // comboUser
             // 
+            this.comboUser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboUser.FormattingEnabled = true;
             this.comboUser.Location = new System.Drawing.Point(245, 98);
             this.comboUser.Name = "comboUser";

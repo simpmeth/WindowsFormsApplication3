@@ -32,12 +32,32 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Код = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Наименование = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Телефон = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Адрес = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Сокращение = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -73,27 +93,8 @@
             this.датаDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Кладовщик = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Сумма = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Код = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Наименование = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Телефон = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Адрес = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Сокращение = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -161,6 +162,49 @@
             this.dataGridView2.Size = new System.Drawing.Size(652, 269);
             this.dataGridView2.TabIndex = 3;
             // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "Код";
+            this.Column11.HeaderText = "Код";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Visible = false;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "Название";
+            this.Column12.HeaderText = "Название";
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "Хар-ка";
+            this.Column13.HeaderText = "Хар-ка";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            // 
+            // Column14
+            // 
+            this.Column14.DataPropertyName = "Ед Из";
+            this.Column14.HeaderText = "Ед Из";
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            // 
+            // Column15
+            // 
+            this.Column15.DataPropertyName = "Цена";
+            this.Column15.HeaderText = "Цена";
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            // 
+            // Column16
+            // 
+            this.Column16.DataPropertyName = "Код Ед ИЗ";
+            this.Column16.HeaderText = "Код Ед ИЗ";
+            this.Column16.Name = "Column16";
+            this.Column16.ReadOnly = true;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView1);
@@ -187,6 +231,36 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(652, 269);
             this.dataGridView1.TabIndex = 2;
+            // 
+            // Код
+            // 
+            this.Код.DataPropertyName = "Код";
+            this.Код.HeaderText = "Код";
+            this.Код.Name = "Код";
+            this.Код.ReadOnly = true;
+            this.Код.Visible = false;
+            this.Код.Width = 50;
+            // 
+            // Наименование
+            // 
+            this.Наименование.DataPropertyName = "Наименование";
+            this.Наименование.HeaderText = "Наименование";
+            this.Наименование.Name = "Наименование";
+            this.Наименование.ReadOnly = true;
+            // 
+            // Телефон
+            // 
+            this.Телефон.DataPropertyName = "Телефон";
+            this.Телефон.HeaderText = "Телефон";
+            this.Телефон.Name = "Телефон";
+            this.Телефон.ReadOnly = true;
+            // 
+            // Адрес
+            // 
+            this.Адрес.DataPropertyName = "Адрес";
+            this.Адрес.HeaderText = "Адрес";
+            this.Адрес.Name = "Адрес";
+            this.Адрес.ReadOnly = true;
             // 
             // tabPage3
             // 
@@ -219,6 +293,56 @@
             this.dataGridView3.Size = new System.Drawing.Size(652, 269);
             this.dataGridView3.TabIndex = 4;
             // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "Код";
+            this.dataGridViewTextBoxColumn16.HeaderText = "Код";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "Имя";
+            this.dataGridViewTextBoxColumn17.HeaderText = "Имя";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "Фамилия";
+            this.dataGridViewTextBoxColumn18.HeaderText = "Фамилия";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "Отчество";
+            this.dataGridViewTextBoxColumn19.HeaderText = "Отчество";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "Пароль";
+            this.dataGridViewTextBoxColumn20.HeaderText = "Пароль";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "Тел";
+            this.dataGridViewTextBoxColumn21.HeaderText = "Тел";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "Адрес";
+            this.dataGridViewTextBoxColumn22.HeaderText = "Адрес";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.dataGridView4);
@@ -244,6 +368,28 @@
             this.dataGridView4.Size = new System.Drawing.Size(655, 269);
             this.dataGridView4.TabIndex = 3;
             // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Код";
+            this.dataGridViewTextBoxColumn15.HeaderText = "Код";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Название";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Название";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // Сокращение
+            // 
+            this.Сокращение.DataPropertyName = "Сокращение";
+            this.Сокращение.HeaderText = "Сокращение";
+            this.Сокращение.Name = "Сокращение";
+            this.Сокращение.ReadOnly = true;
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.dataGridView5);
@@ -261,6 +407,7 @@
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
+            this.Column4,
             this.Column5,
             this.Column6,
             this.Column7,
@@ -328,28 +475,28 @@
             // товарToolStripMenuItem
             // 
             this.товарToolStripMenuItem.Name = "товарToolStripMenuItem";
-            this.товарToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.товарToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.товарToolStripMenuItem.Text = "Товар";
             this.товарToolStripMenuItem.Click += new System.EventHandler(this.товарToolStripMenuItem_Click);
             // 
             // клиентаToolStripMenuItem
             // 
             this.клиентаToolStripMenuItem.Name = "клиентаToolStripMenuItem";
-            this.клиентаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.клиентаToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.клиентаToolStripMenuItem.Text = "Клиента";
             this.клиентаToolStripMenuItem.Click += new System.EventHandler(this.клиентаToolStripMenuItem_Click);
             // 
             // кладовщикаToolStripMenuItem
             // 
             this.кладовщикаToolStripMenuItem.Name = "кладовщикаToolStripMenuItem";
-            this.кладовщикаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.кладовщикаToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.кладовщикаToolStripMenuItem.Text = "Кладовщика";
             this.кладовщикаToolStripMenuItem.Click += new System.EventHandler(this.кладовщикаToolStripMenuItem_Click);
             // 
             // едИзToolStripMenuItem
             // 
             this.едИзToolStripMenuItem.Name = "едИзToolStripMenuItem";
-            this.едИзToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.едИзToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.едИзToolStripMenuItem.Text = "Ед. Из.";
             this.едИзToolStripMenuItem.Click += new System.EventHandler(this.едИзToolStripMenuItem_Click);
             // 
@@ -364,7 +511,7 @@
             // накладнаяToolStripMenuItem
             // 
             this.накладнаяToolStripMenuItem.Name = "накладнаяToolStripMenuItem";
-            this.накладнаяToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.накладнаяToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.накладнаяToolStripMenuItem.Text = "Накладная";
             this.накладнаяToolStripMenuItem.Click += new System.EventHandler(this.накладнаяToolStripMenuItem_Click);
             // 
@@ -379,7 +526,7 @@
             // оСоздателеToolStripMenuItem
             // 
             this.оСоздателеToolStripMenuItem.Name = "оСоздателеToolStripMenuItem";
-            this.оСоздателеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.оСоздателеToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.оСоздателеToolStripMenuItem.Text = "О создателе";
             // 
             // butDelete
@@ -516,184 +663,53 @@
             this.Сумма.HeaderText = "Сумма";
             this.Сумма.Name = "Сумма";
             // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "Код";
-            this.Column11.HeaderText = "Код";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Visible = false;
-            // 
-            // Column12
-            // 
-            this.Column12.DataPropertyName = "Название";
-            this.Column12.HeaderText = "Название";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "Хар-ка";
-            this.Column13.HeaderText = "Хар-ка";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            // 
-            // Column14
-            // 
-            this.Column14.DataPropertyName = "Ед Из";
-            this.Column14.HeaderText = "Ед Из";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            // 
-            // Column15
-            // 
-            this.Column15.DataPropertyName = "Цена";
-            this.Column15.HeaderText = "Цена";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            // 
-            // Column16
-            // 
-            this.Column16.DataPropertyName = "Код Ед ИЗ";
-            this.Column16.HeaderText = "Код Ед ИЗ";
-            this.Column16.Name = "Column16";
-            this.Column16.ReadOnly = true;
-            // 
-            // Код
-            // 
-            this.Код.DataPropertyName = "Код";
-            this.Код.HeaderText = "Код";
-            this.Код.Name = "Код";
-            this.Код.ReadOnly = true;
-            this.Код.Visible = false;
-            this.Код.Width = 50;
-            // 
-            // Наименование
-            // 
-            this.Наименование.DataPropertyName = "Наименование";
-            this.Наименование.HeaderText = "Наименование";
-            this.Наименование.Name = "Наименование";
-            this.Наименование.ReadOnly = true;
-            // 
-            // Телефон
-            // 
-            this.Телефон.DataPropertyName = "Телефон";
-            this.Телефон.HeaderText = "Телефон";
-            this.Телефон.Name = "Телефон";
-            this.Телефон.ReadOnly = true;
-            // 
-            // Адрес
-            // 
-            this.Адрес.DataPropertyName = "Адрес";
-            this.Адрес.HeaderText = "Адрес";
-            this.Адрес.Name = "Адрес";
-            this.Адрес.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "Код";
-            this.dataGridViewTextBoxColumn16.HeaderText = "Код";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "Имя";
-            this.dataGridViewTextBoxColumn17.HeaderText = "Имя";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.DataPropertyName = "Фамилия";
-            this.dataGridViewTextBoxColumn18.HeaderText = "Фамилия";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "Отчество";
-            this.dataGridViewTextBoxColumn19.HeaderText = "Отчество";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "Пароль";
-            this.dataGridViewTextBoxColumn20.HeaderText = "Пароль";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "Тел";
-            this.dataGridViewTextBoxColumn21.HeaderText = "Тел";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.DataPropertyName = "Адрес";
-            this.dataGridViewTextBoxColumn22.HeaderText = "Адрес";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Код";
-            this.dataGridViewTextBoxColumn15.HeaderText = "Код";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Название";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Название";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // Сокращение
-            // 
-            this.Сокращение.DataPropertyName = "Сокращение";
-            this.Сокращение.HeaderText = "Сокращение";
-            this.Сокращение.Name = "Сокращение";
-            this.Сокращение.ReadOnly = true;
-            // 
             // Column3
             // 
+            this.Column3.DataPropertyName = "Код";
             this.Column3.HeaderText = "Код";
             this.Column3.Name = "Column3";
             this.Column3.Visible = false;
             // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Ид";
+            this.Column4.HeaderText = "Ид";
+            this.Column4.Name = "Column4";
+            this.Column4.Visible = false;
+            // 
             // Column5
             // 
+            this.Column5.DataPropertyName = "Дата";
             this.Column5.HeaderText = "Дата";
             this.Column5.Name = "Column5";
             // 
             // Column6
             // 
+            this.Column6.DataPropertyName = "Клиент";
             this.Column6.HeaderText = "Клиент";
             this.Column6.Name = "Column6";
             // 
             // Column7
             // 
+            this.Column7.DataPropertyName = "Кладовщик";
             this.Column7.HeaderText = "Кладовщик";
             this.Column7.Name = "Column7";
             // 
             // Column8
             // 
+            this.Column8.DataPropertyName = "Сумма";
             this.Column8.HeaderText = "Сумма";
             this.Column8.Name = "Column8";
             // 
             // Column9
             // 
+            this.Column9.DataPropertyName = "Адрес Кл.";
             this.Column9.HeaderText = "Адрес Кл.";
             this.Column9.Name = "Column9";
             // 
             // Column10
             // 
+            this.Column10.DataPropertyName = "Код Кл.";
             this.Column10.HeaderText = "Код Кл.";
             this.Column10.Name = "Column10";
             // 
@@ -840,6 +856,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Сокращение;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;

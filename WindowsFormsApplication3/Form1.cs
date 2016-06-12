@@ -82,7 +82,7 @@ namespace WindowsFormsApplication3
             LoadUnit();
         }
 
-        private void LoadDok()
+        public void LoadDok()
         {
             var dataReaderBySql = new DataReaderBySql();
             dataReaderBySql.GetDataReaderBySql("SELECT Код, Ид, Дата, Клиент, Кладовщик, Сумма, [Адрес Кл.], [Код Кл.] FROM dbo.dok");
@@ -97,6 +97,19 @@ namespace WindowsFormsApplication3
             dataReaderBySql.DoSqlCommand("delete FROM dbo.dok where Код=\'"+kod+"\'");
             dataReaderBySql.CloseDbConnection();
 
+            LoadDok();
+        }
+
+        private void InsertDok(string kod, string date, string kodClient, string client, string adresClienta, string user, string summa)
+        {
+            var dataReaderBySql = new DataReaderBySql();
+            dataReaderBySql.DoSqlCommand("INSERT INTO [dbo].[dok] " +
+                                         "( [Ид], [Дата], [Клиент], [Кладовщик], [Сумма], " +
+                                         "[Адрес Кл.], [Код Кл.])" +
+                                         " VALUES ( \'" + kod + "\', \'" + date + "\', \'" +client+ "\', \'" +user + "\', \'" +summa + "\', \'" + adresClienta
+                                         + "\', \'" + kodClient + "\')");
+            dataReaderBySql.CloseDbConnection();
+            
             LoadDok();
         }
 
@@ -207,7 +220,7 @@ namespace WindowsFormsApplication3
             dataReaderBySql.CloseDbConnection();
         }
 
-        private void LoadNomenklatura()
+        public void LoadNomenklatura()
         {
             var dataReaderBySql = new DataReaderBySql();
             dataReaderBySql.GetDataReaderBySql("SELECT   Код, Наименование, Кол, [Ед Из], Цена, [Код Продукта], [Хар-ка], [Код Ед ИЗ], Стоимость, primary_sklad from dbo.nomenklatura");
@@ -260,6 +273,7 @@ namespace WindowsFormsApplication3
             Dok newForm = new Dok();
             newForm.Owner = this;
             newForm.ShowDialog();
+            
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -421,37 +435,25 @@ namespace WindowsFormsApplication3
 
                         Dok newForm = new Dok();
                         newForm.Owner = this;
-
-
-                        var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
-                        var selectedKod = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        var selectRowIndex = dataGridView5.SelectedCells[0].RowIndex;
+                        var selectedKod = dataGridView5.Rows[selectRowIndex].Cells[0].Value.ToString();
+                        RemoveDok(selectedKod);
+                     // var selectRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                       // 
 
                        // newForm.Edit();
-                        newForm.ShowDialog();
+                        //newForm.ShowDialog();
                     }
                 }
             }
         }
 
-        public void setNewDok(object id, object date,object kodClient, object client, object adresClienta ,object user, object summa)
+        public void setNewDok(string id, string date, string kodClient, string client, string adresClienta , string user, string summa)
         {
-          /*  DataRow r = dbDataSet.dok.NewRow();
-            r["Ид"] = id;
-            r["Дата"] = date;
-            r["Код Кл"] = kodClient;
-            r["Клиент"] = client;
-            r["Адрес Кл"] = adresClienta;
-            r["Кладовщик"] = user;
-            r["Сумма"] = summa;
+            InsertDok(id, date, kodClient, client, adresClienta, user, summa);
 
-
-            dbDataSet.dok.Rows.Add(r);
-            this.dokTableAdapter.Update(this.dbDataSet.dok);
-            this.dokTableAdapter.Fill(this.dbDataSet.dok);
-
-            this.nomenklaturaTableAdapter.Update(this.dbDataSet1.nomenklatura);
-            this.nomenklaturaTableAdapter.Fill(this.dbDataSet1.nomenklatura);
-            */
+            LoadNomenklatura();
+            LoadDok();
         }
         public void setNewUnit(String status, string id, String name, String name2)
         {

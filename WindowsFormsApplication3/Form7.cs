@@ -8,17 +8,9 @@ namespace shop
     public partial class AddGoods : Form
     {
         public AddGoods()
-        {//подглючаем базу для составления списка продуктов
+        {
             InitializeComponent();
 
-            /*var dataReaderBySql = new DataReaderBySql();
-            dataReaderBySql.GetDataReaderBySql("SELECT Код, Название FROM dbo.goods");
-            comboGoods.DataSource = dataReaderBySql.GetDataSource();
-
-            dataReaderBySql.CloseDbConnection();
-
-            comboGoods.DisplayMember = "Название";
-            comboGoods.ValueMember = "Код";*/
         }
 
         private void button2_Click(object sender, EventArgs e)
